@@ -1,0 +1,35 @@
+laravel: '@testbench'
+
+providers:
+  - Orion\NotifyRules\NotifyRulesServiceProvider
+  - Workbench\App\Providers\AdminPanelProvider
+
+migrations:
+  - workbench/database/migrations
+
+seeders:
+  - Workbench\Database\Seeders\DatabaseSeeder
+
+workbench:
+  start: '/admin'
+  install: true
+  health: false
+  discovers:
+    web: false
+    api: false
+    commands: false
+    components: false
+    factories: false
+    views: false
+  build:
+    - asset-publish
+    - filament-assets
+    - create-sqlite-db
+    - db-wipe
+    - migrate-fresh
+  assets:
+    - laravel-assets
+  sync:
+    - from: storage
+      to: workbench/storage
+      reverse: true

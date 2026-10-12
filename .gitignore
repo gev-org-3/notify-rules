@@ -9,7 +9,9 @@ docs
 node_modules
 phpunit.xml
 phpstan.neon
-testbench.yaml
 vendor
 install.cmd
 composer.lock
+workbench/.env
+workbench/storage
+workbench/database/database.sqlite

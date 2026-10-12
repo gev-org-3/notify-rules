@@ -51,7 +51,12 @@ abstract class TestCase extends Orchestra
     protected function defineEnvironment($app): void
     {
         $app['config']->set('app.key', 'base64:' . base64_encode(str_repeat('a', 32)));
+        // The workbench .env is copied into Testbench's skeleton; tests must not depend on it.
+        $app['config']->set('app.locale', 'en');
         $app['config']->set('database.default', 'testing');
+        $app['config']->set('queue.default', 'sync');
+        $app['config']->set('cache.default', 'array');
+        $app['config']->set('session.driver', 'array');
         $app['config']->set('auth.providers.users.model', User::class);
         $app['config']->set('notify-rules.user_model', User::class);
         $app['config']->set('notify-rules.telegram.bot_token', 'test-token');

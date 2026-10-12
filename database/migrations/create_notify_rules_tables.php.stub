@@ -1,0 +1,69 @@
+<?php
+
+declare(strict_types=1);
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    public function up(): void
+    {
+        Schema::create(config('notify-rules.tables.rules'), function (Blueprint $table): void {
+            $table->id();
+
+            if ($tenantColumn = config('notify-rules.tenancy.column')) {
+                $table->unsignedBigInteger($tenantColumn)->nullable()->index();
+            }
+
+            $table->string('name');
+            $table->boolean('is_active')->default(true);
+            $table->string('model_type');
+            $table->string('event', 32);
+            $table->string('watched_field')->nullable();
+            $table->json('conditions')->nullable();
+            $table->json('recipients')->nullable();
+            $table->text('template');
+            $table->timestamps();
+
+            $table->index(['model_type', 'is_active']);
+        });
+
+        Schema::create(config('notify-rules.tables.telegram_links'), function (Blueprint $table): void {
+            $table->id();
+            $table->morphs('notifiable');
+            $table->string('chat_id')->nullable()->index();
+            $table->string('username')->nullable();
+            $table->timestamp('linked_at')->nullable();
+            $table->boolean('is_active')->default(false);
+            $table->string('link_token')->nullable()->unique();
+            $table->timestamp('link_token_expires_at')->nullable();
+            $table->timestamps();
+        });
+
+        Schema::create(config('notify-rules.tables.deliveries'), function (Blueprint $table): void {
+            $table->id();
+            $table->foreignId('rule_id')->nullable()->index();
+            $table->string('channel', 32)->default('telegram');
+            $table->string('chat_id');
+            $table->nullableMorphs('subject');
+            $table->text('message');
+            $table->string('status', 16)->default('pending')->index();
+            $table->unsignedInteger('attempts')->default(0);
+            $table->text('error')->nullable();
+            $table->string('telegram_message_id')->nullable();
+            $table->timestamp('sent_at')->nullable();
+            $table->timestamps();
+
+            $table->index('created_at');
+        });
+    }
+
+    public function down(): void
+    {
+        Schema::dropIfExists(config('notify-rules.tables.deliveries'));
+        Schema::dropIfExists(config('notify-rules.tables.telegram_links'));
+        Schema::dropIfExists(config('notify-rules.tables.rules'));
+    }
+};

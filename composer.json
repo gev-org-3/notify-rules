@@ -9,10 +9,10 @@
         "filament-plugin",
         "notify-rules"
     ],
-    "homepage": "https://github.com/orion/notify-rules",
+    "homepage": "https://github.com/gev-org-3/notify-rules",
     "support": {
-        "issues": "https://github.com/orion/notify-rules/issues",
-        "source": "https://github.com/orion/notify-rules"
+        "issues": "https://github.com/gev-org-3/notify-rules/issues",
+        "source": "https://github.com/gev-org-3/notify-rules"
     },
     "license": "MIT",
     "authors": [

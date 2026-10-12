@@ -5,11 +5,14 @@ declare(strict_types=1);
 namespace Orion\NotifyRules;
 
 use Closure;
+use Filament\Actions\Action;
 use Filament\Contracts\Plugin;
 use Filament\Panel;
+use Filament\Support\Icons\Heroicon;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use InvalidArgumentException;
+use Orion\NotifyRules\Filament\Pages\TelegramConnection;
 
 final class NotifyRulesPlugin implements Plugin
 {
@@ -33,7 +36,18 @@ final class NotifyRulesPlugin implements Plugin
 
     public function register(Panel $panel): void
     {
-        // Resources and the user menu item are registered in later stages.
+        $panel->pages([
+            TelegramConnection::class,
+        ]);
+
+        if ($this->hasConnectTelegramInUserMenu()) {
+            $panel->userMenuItems([
+                Action::make('notify-rules-telegram')
+                    ->label(fn (): string => __('notify-rules::notify-rules.telegram.user_menu'))
+                    ->icon(Heroicon::OutlinedPaperAirplane)
+                    ->url(fn (): string => TelegramConnection::getUrl()),
+            ]);
+        }
     }
 
     public function boot(Panel $panel): void

@@ -6,6 +6,8 @@ namespace Orion\NotifyRules;
 
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Support\Facades\RateLimiter;
+use Orion\NotifyRules\Commands\PollCommand;
+use Orion\NotifyRules\Commands\WebhookCommand;
 use Orion\NotifyRules\Jobs\SendTelegramMessage;
 use Orion\NotifyRules\Telegram\HttpTelegramClient;
 use Orion\NotifyRules\Telegram\TelegramClient;
@@ -23,6 +25,11 @@ final class NotifyRulesServiceProvider extends PackageServiceProvider
             ->hasConfigFile()
             ->hasMigrations(['create_notify_rules_tables'])
             ->hasTranslations()
+            ->hasViews(self::$name)
+            ->hasCommands([
+                WebhookCommand::class,
+                PollCommand::class,
+            ])
             ->hasInstallCommand(function (InstallCommand $command): void {
                 $command
                     ->publishConfigFile()
@@ -41,6 +48,8 @@ final class NotifyRulesServiceProvider extends PackageServiceProvider
 
     public function packageBooted(): void
     {
+        $this->loadRoutesFrom(__DIR__ . '/../routes/notify-rules.php');
+
         // The plugin ships no CSS/JS of its own: UI is built from Filament's Blade components,
         // so nothing is registered with FilamentAsset here.
 

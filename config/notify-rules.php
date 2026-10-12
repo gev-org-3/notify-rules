@@ -12,6 +12,11 @@ return [
         'webhook_secret' => env('NOTIFY_RULES_TELEGRAM_WEBHOOK_SECRET'),
 
         'api_url' => env('NOTIFY_RULES_TELEGRAM_API_URL', 'https://api.telegram.org'),
+
+        'webhook_path' => 'notify-rules/telegram/webhook',
+
+        // Minutes a "Connect Telegram" link stays valid.
+        'link_token_ttl' => 15,
     ],
 
     'queue' => [

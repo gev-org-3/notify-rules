@@ -9,6 +9,12 @@
 
 This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
 
+## Requirements
+
+- PHP 8.2+ (Laravel 13 needs PHP 8.3+)
+- Laravel 11, 12 or 13
+- Filament 5.10+
+
 ## Installation
 
 You can install the package via composer:

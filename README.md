@@ -258,15 +258,19 @@ The plugin is translated into English and Russian. To change the texts or add a 
 php artisan vendor:publish --tag="notify-rules-translations"
 ```
 
+<div class="filament-hidden">
+
 ## Testing
 
 ```bash
 composer test
 ```
 
+</div>
+
 ## Changelog
 
-See [CHANGELOG](CHANGELOG.md).
+See [CHANGELOG](https://github.com/gev-org-3/notify-rules-assets/blob/main/docs/CHANGELOG.md).
 
 ## Security
 
@@ -278,4 +282,4 @@ If you discover a security issue, please email gevorgmanukyan349@gmail.com inste
 
 ## License
 
-Notify Rules is commercial software. Each license covers one project, with unlimited local, development and staging environments, and a year of updates. See the [license](LICENSE.md) for the full terms.
+Notify Rules is commercial software. Each license covers one project, with unlimited local, development and staging environments, and a year of updates. See the [license](https://github.com/gev-org-3/notify-rules-assets/blob/main/docs/LICENSE.md) for the full terms.

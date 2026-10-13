@@ -49,4 +49,32 @@ return [
         'chat_id' => 'Chat ID: <code>:id</code>',
     ],
 
+    'events' => [
+        'created' => 'Created',
+        'updated' => 'Updated',
+        'deleted' => 'Deleted',
+        'field_changed' => 'Field changed',
+    ],
+
+    'operators' => [
+        'Equals' => 'equals',
+        'NotEquals' => 'does not equal',
+        'GreaterThan' => 'greater than',
+        'GreaterThanOrEqual' => 'greater than or equal to',
+        'LessThan' => 'less than',
+        'LessThanOrEqual' => 'less than or equal to',
+        'Contains' => 'contains',
+        'In' => 'is one of',
+        'IsEmpty' => 'is empty',
+        'IsNotEmpty' => 'is not empty',
+        'Changed' => 'changed',
+        'ChangedTo' => 'changed to',
+        'ChangedFrom' => 'changed from',
+    ],
+
+    'template' => [
+        'yes' => 'Yes',
+        'no' => 'No',
+    ],
+
 ];

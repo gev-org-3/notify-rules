@@ -194,3 +194,29 @@ it('is queued on the configured connection after commit', function (): void {
         ->and($job->afterCommit)->toBeTrue()
         ->and($job->retryUntil()->getTimestamp())->toBeGreaterThan(now()->addHours(5)->getTimestamp());
 });
+
+it('sends every message on the sync queue, which cannot release rate-limited jobs', function (): void {
+    Http::fake(['*' => Http::response(['ok' => true, 'result' => ['message_id' => 1]])]);
+    $first = makeDelivery('100');
+    $second = makeDelivery('100');
+
+    SendTelegramMessage::dispatchSync($first);
+    SendTelegramMessage::dispatchSync($second);
+
+    expect($first->fresh()->status)->toBe(DeliveryStatus::Sent)
+        ->and($second->fresh()->status)->toBe(DeliveryStatus::Sent);
+});
+
+it('fails instead of retrying later on the sync queue', function (array $response, int $status): void {
+    Http::fake(['*' => Http::response($response, $status)]);
+    $delivery = makeDelivery();
+
+    SendTelegramMessage::dispatchSync($delivery);
+
+    $delivery->refresh();
+    expect($delivery->status)->toBe(DeliveryStatus::Failed)
+        ->and($delivery->error)->not->toBeEmpty();
+})->with([
+    '429' => [telegramError(429, 'Too Many Requests: retry after 5', ['retry_after' => 5]), 429],
+    '500' => [telegramError(500, 'Internal Server Error'), 500],
+]);

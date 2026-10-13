@@ -77,6 +77,11 @@ final class NotifyRulesPlugin implements Plugin
             if (! is_subclass_of($model, Model::class)) {
                 throw new InvalidArgumentException("[{$model}] is not an Eloquent model.");
             }
+
+            // Rules on the package's own models would trigger themselves.
+            if (str_starts_with($model, 'Orion\\NotifyRules\\Models\\')) {
+                throw new InvalidArgumentException("[{$model}] belongs to Notify Rules and cannot have rules.");
+            }
         }
 
         $this->models = array_values(array_unique($models));

@@ -49,4 +49,32 @@ return [
         'chat_id' => 'ID чата: <code>:id</code>',
     ],
 
+    'events' => [
+        'created' => 'Создание',
+        'updated' => 'Изменение',
+        'deleted' => 'Удаление',
+        'field_changed' => 'Изменение поля',
+    ],
+
+    'operators' => [
+        'Equals' => 'равно',
+        'NotEquals' => 'не равно',
+        'GreaterThan' => 'больше',
+        'GreaterThanOrEqual' => 'больше или равно',
+        'LessThan' => 'меньше',
+        'LessThanOrEqual' => 'меньше или равно',
+        'Contains' => 'содержит',
+        'In' => 'одно из',
+        'IsEmpty' => 'пусто',
+        'IsNotEmpty' => 'не пусто',
+        'Changed' => 'изменилось',
+        'ChangedTo' => 'изменилось на',
+        'ChangedFrom' => 'изменилось с',
+    ],
+
+    'template' => [
+        'yes' => 'Да',
+        'no' => 'Нет',
+    ],
+
 ];

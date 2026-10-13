@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Orion\NotifyRules\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Support\Carbon;
 use Orion\NotifyRules\Enums\DeliveryStatus;
@@ -49,6 +50,14 @@ final class Delivery extends Model
             'attempts' => 'integer',
             'sent_at' => 'datetime',
         ];
+    }
+
+    /**
+     * @return BelongsTo<NotificationRule, $this>
+     */
+    public function rule(): BelongsTo
+    {
+        return $this->belongsTo(NotificationRule::class, 'rule_id');
     }
 
     /**

@@ -24,6 +24,11 @@ return [
         'name' => env('NOTIFY_RULES_QUEUE'),
     ],
 
+    'cache' => [
+        // Cache store for the active rules of each model. Null uses the default store.
+        'store' => env('NOTIFY_RULES_CACHE_STORE'),
+    ],
+
     'tables' => [
         'rules' => 'notify_rules',
         'telegram_links' => 'notify_telegram_links',

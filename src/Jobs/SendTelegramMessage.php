@@ -7,6 +7,7 @@ namespace Orion\NotifyRules\Jobs;
 use DateTimeInterface;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
+use Illuminate\Queue\Jobs\SyncJob;
 use Illuminate\Queue\Middleware\RateLimited;
 use Orion\NotifyRules\Enums\DeliveryStatus;
 use Orion\NotifyRules\Models\Delivery;
@@ -47,6 +48,11 @@ final class SendTelegramMessage implements ShouldQueue
      */
     public function middleware(): array
     {
+        // A rate-limited job is released for later, which the sync queue cannot do: the message would be lost.
+        if ($this->runsSynchronously()) {
+            return [];
+        }
+
         return [new RateLimited(self::RATE_LIMITER)];
     }
 
@@ -90,8 +96,7 @@ final class SendTelegramMessage implements ShouldQueue
     {
         if ($e->isRateLimited()) {
             // Telegram refused to process the request, so it does not count as an attempt.
-            $delivery->recordError($e->getMessage());
-            $this->release($e->retryAfter ?? self::BACKOFF[0]);
+            $this->retryLater($delivery, $e->getMessage(), $e->retryAfter ?? self::BACKOFF[0]);
 
             return;
         }
@@ -106,12 +111,29 @@ final class SendTelegramMessage implements ShouldQueue
         }
 
         if ($e->isTransient() && $delivery->attempts < self::MAX_ATTEMPTS) {
-            $delivery->recordError($e->getMessage());
-            $this->release(self::BACKOFF[$delivery->attempts - 1] ?? self::BACKOFF[array_key_last(self::BACKOFF)]);
+            $this->retryLater($delivery, $e->getMessage(), self::BACKOFF[$delivery->attempts - 1] ?? self::BACKOFF[array_key_last(self::BACKOFF)]);
 
             return;
         }
 
         $delivery->markAsFailed($e->getMessage());
+    }
+
+    private function retryLater(Delivery $delivery, string $error, int $delay): void
+    {
+        // The sync queue cannot retry later, so the delivery fails now and can be resent from the delivery log.
+        if ($this->runsSynchronously()) {
+            $delivery->markAsFailed($error);
+
+            return;
+        }
+
+        $delivery->recordError($error);
+        $this->release($delay);
+    }
+
+    private function runsSynchronously(): bool
+    {
+        return $this->job instanceof SyncJob;
     }
 }

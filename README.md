@@ -122,11 +122,13 @@ With the `sync` driver, messages are sent right away. A message that hits Telegr
 
 Each user opens **Telegram** in the user menu, presses **Connect Telegram** and then **Start** in the bot. The link works once and expires after 15 minutes. The page shows when the account is connected and lets the user disconnect.
 
-![Connect Telegram](https://raw.githubusercontent.com/gev-org-3/notify-rules/main/art/telegram-connection.jpg)
+![Connect Telegram](https://raw.githubusercontent.com/gev-org-3/notify-rules/main/art/telegram-connection.png)
 
 ## Creating a rule
 
-![Rule form](https://raw.githubusercontent.com/gev-org-3/notify-rules/main/art/rule-form.jpg)
+![Rules](https://raw.githubusercontent.com/gev-org-3/notify-rules/main/art/rules-list.png)
+
+![Rule form](https://raw.githubusercontent.com/gev-org-3/notify-rules/main/art/rule-form.png)
 
 A rule has four parts:
 
@@ -182,7 +184,7 @@ Formatting: `<b>`, `<i>`, `<code>` and `<a href="https://...">`. Everything else
 
 ## Delivery log
 
-![Delivery log](https://raw.githubusercontent.com/gev-org-3/notify-rules/main/art/delivery-log.jpg)
+![Delivery log](https://raw.githubusercontent.com/gev-org-3/notify-rules/main/art/delivery-log.png)
 
 Every message is logged with its rule, recipient, status, attempts and error. Filter by status, rule or period, open a message, and resend failed ones.
 

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Workbench\App\Providers;
 
 use Filament\Actions\Action;
+use Filament\Facades\Filament;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -18,6 +19,7 @@ use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Support\Facades\Route;
@@ -83,6 +85,22 @@ final class AdminPanelProvider extends PanelProvider
                 })
                     ->whereIn('locale', array_keys(SetLocale::LOCALES))
                     ->name('locale');
+
+                // Local only: logs in and opens a page in one request, for headless screenshots of the README.
+                if (app()->environment('local')) {
+                    Route::get('screenshot-login', function (Request $request): RedirectResponse {
+                        $user = User::query()->where('email', $request->query('email', 'admin@example.com'))->firstOrFail();
+                        Filament::auth()->login($user);
+
+                        if (array_key_exists((string) $request->query('locale'), SetLocale::LOCALES)) {
+                            session()->put('locale', $request->query('locale'));
+                        }
+
+                        $to = (string) $request->query('to', '/admin');
+
+                        return redirect(str_starts_with($to, '/admin') ? $to : '/admin');
+                    })->name('screenshot-login');
+                }
             })
             ->userMenuItems([
                 Action::make('workbench-locale')

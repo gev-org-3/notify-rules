@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Notify Rules cover</title>
+<!-- Rendered to cover.jpg at 2560x1440 with headless Chrome. Crops come from rule-form-dark.png (1440x2150). -->
+<style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body { width: 2560px; height: 1440px; }
+
+    body {
+        overflow: hidden;
+        font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+        color: #f8fafc;
+        background:
+            radial-gradient(1200px 900px at 85% 20%, rgba(14, 165, 233, 0.22), transparent 60%),
+            radial-gradient(900px 700px at 10% 90%, rgba(56, 189, 248, 0.12), transparent 60%),
+            #0a0f1a;
+        position: relative;
+    }
+
+    .copy { position: absolute; left: 160px; top: 250px; width: 1060px; }
+
+    .eyebrow {
+        display: inline-block;
+        font-size: 30px;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        color: #7dd3fc;
+        background: rgba(14, 165, 233, 0.14);
+        border: 2px solid rgba(125, 211, 252, 0.35);
+        border-radius: 999px;
+        padding: 12px 28px;
+    }
+
+    h1 { font-size: 152px; line-height: 1; font-weight: 800; letter-spacing: -0.035em; margin-top: 48px; }
+
+    .lead { font-size: 50px; line-height: 1.3; color: #cbd5e1; margin-top: 40px; }
+    .lead b { color: #f8fafc; font-weight: 700; }
+
+    .flow { display: flex; flex-wrap: nowrap; gap: 14px; align-items: center; margin-top: 72px; }
+    .chip {
+        font-size: 29px; font-weight: 600; color: #e2e8f0; white-space: nowrap;
+        background: #111a2b; border: 2px solid #22314a; border-radius: 16px; padding: 14px 20px;
+    }
+    .arrow { font-size: 32px; color: #38bdf8; }
+
+    .shot {
+        position: absolute;
+        overflow: hidden;
+        border-radius: 28px;
+        border: 2px solid #1f2b40;
+        box-shadow: 0 40px 120px rgba(0, 0, 0, 0.55);
+        background-image: url("rule-form-dark.png");
+        background-repeat: no-repeat;
+    }
+
+    /* Conditions block: x 352..1410, y 602..1008 in the source, scaled 1.18. */
+    .conditions {
+        left: 1250px; top: 150px; width: 1248px; height: 479px;
+        background-size: 1699px 2537px;
+        background-position: -415px -710px;
+    }
+
+    /* Message block: x 352..1410, y 1481..2046 in the source, scaled 1.18. */
+    .message {
+        left: 1250px; top: 680px; width: 1248px; height: 667px;
+        background-size: 1699px 2537px;
+        background-position: -415px -1748px;
+    }
+
+    .bubble {
+        position: absolute; left: 1850px; top: 1085px; width: 620px;
+        background: #1e2c3d; border-radius: 34px 34px 34px 10px; padding: 34px 40px 26px;
+        box-shadow: 0 30px 90px rgba(0, 0, 0, 0.6);
+        font-size: 33px; line-height: 1.42; color: #f1f5f9;
+    }
+    .bubble .from { font-size: 28px; font-weight: 700; color: #7dd3fc; margin-bottom: 10px; }
+    .bubble .link { color: #7dd3fc; }
+    .bubble .time { text-align: right; font-size: 24px; color: #94a3b8; margin-top: 8px; }
+</style>
+</head>
+<body>
+    <div class="copy">
+        <span class="eyebrow">Filament plugin</span>
+        <h1>Notify Rules</h1>
+        <p class="lead">Telegram notifications from your Filament panel. <b>Rules, not code.</b></p>
+        <div class="flow">
+            <span class="chip">Order created</span><span class="arrow">→</span>
+            <span class="chip">total &gt; 1000</span><span class="arrow">→</span>
+            <span class="chip">Sales team</span><span class="arrow">→</span>
+            <span class="chip">Telegram</span>
+        </div>
+    </div>
+
+    <div class="shot conditions"></div>
+    <div class="shot message"></div>
+
+    <div class="bubble">
+        <div class="from">Shop Notifications</div>
+        <b>New order ORD-10482</b><br>
+        Total: $2,350.00<br>
+        Customer: Admin<br>
+        <span class="link">shop.test/admin/orders/7</span>
+        <div class="time">12:04</div>
+    </div>
+</body>
+</html>

@@ -5,6 +5,12 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 
 ## [Unreleased]
 
+## [1.0.1] - 2026-10-13
+
+### Changed
+
+- Notify Rules is now free and open source under the MIT license.
+
 ## [1.0.0] - 2026-10-13
 
 First release.
@@ -24,5 +30,6 @@ First release.
 - English and Russian translations.
 - Support for Laravel 11, 12 and 13 and Filament 5.10+.
 
-[Unreleased]: https://github.com/gev-org-3/notify-rules/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/gev-org-3/notify-rules/compare/v1.0.1...HEAD
+[1.0.1]: https://github.com/gev-org-3/notify-rules/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/gev-org-3/notify-rules/releases/tag/v1.0.0

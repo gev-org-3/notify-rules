@@ -28,3 +28,4 @@ jobs:
           # Uploading SARIF to code scanning needs GitHub Advanced Security on a private repository.
           # Findings are reported in the log and as annotations, and fail the job.
           advanced-security: false
+          annotations: true

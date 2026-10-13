@@ -3,11 +3,10 @@
 declare(strict_types=1);
 
 use Filament\Facades\Filament;
+use Livewire\Livewire;
 use Orion\NotifyRules\Filament\Pages\TelegramConnection;
 use Orion\NotifyRules\Telegram\TelegramLinkManager;
 use Orion\NotifyRules\Tests\Fixtures\Models\User;
-
-use function Pest\Livewire\livewire;
 
 beforeEach(function (): void {
     Filament::setCurrentPanel(Filament::getPanel('admin'));
@@ -30,7 +29,7 @@ it('renders for a user without Telegram', function (): void {
 });
 
 it('generates a deep link on connect', function (): void {
-    $component = livewire(TelegramConnection::class)
+    $component = Livewire::test(TelegramConnection::class)
         ->callAction('connect')
         ->assertHasNoActionErrors();
 
@@ -51,7 +50,7 @@ it('generates a deep link on connect', function (): void {
 it('warns when the bot username is missing', function (): void {
     config()->set('notify-rules.telegram.bot_username', null);
 
-    livewire(TelegramConnection::class)
+    Livewire::test(TelegramConnection::class)
         ->callAction('connect')
         ->assertSet('deepLink', null)
         ->assertNotified();
@@ -61,7 +60,7 @@ it('disconnects Telegram', function (): void {
     $links = app(TelegramLinkManager::class);
     $links->complete($links->createLinkToken($this->user), '777', 'john');
 
-    livewire(TelegramConnection::class)
+    Livewire::test(TelegramConnection::class)
         ->assertActionVisible('disconnect')
         ->callAction('disconnect')
         ->assertNotified()
@@ -71,5 +70,5 @@ it('disconnects Telegram', function (): void {
 });
 
 it('hides disconnect when not connected', function (): void {
-    livewire(TelegramConnection::class)->assertActionHidden('disconnect');
+    Livewire::test(TelegramConnection::class)->assertActionHidden('disconnect');
 });

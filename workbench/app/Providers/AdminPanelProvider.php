@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Workbench\App\Providers;
 
+use Filament\Actions\Action;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -12,13 +13,17 @@ use Filament\Pages\Dashboard;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
+use Filament\Support\Icons\Heroicon;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
+use Illuminate\Support\Facades\Route;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Orion\NotifyRules\NotifyRulesPlugin;
+use Workbench\App\Http\Middleware\SetLocale;
 use Workbench\App\Models\Order;
 use Workbench\App\Models\User;
 
@@ -64,8 +69,30 @@ final class AdminPanelProvider extends PanelProvider
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
             ])
+            // Persistent, so Livewire requests (forms, tables, actions) use the chosen language too.
+            ->middleware([SetLocale::class], isPersistent: true)
+            ->routes(function (): void {
+                Route::get('locale/{locale}', function (string $locale): RedirectResponse {
+                    session()->put('locale', $locale);
+
+                    return redirect()->back();
+                })
+                    ->whereIn('locale', array_keys(SetLocale::LOCALES))
+                    ->name('locale');
+            })
+            ->userMenuItems([
+                Action::make('workbench-locale')
+                    ->label(fn (): string => SetLocale::LOCALES[$this->otherLocale()])
+                    ->icon(Heroicon::OutlinedLanguage)
+                    ->url(fn (): string => route('filament.admin.locale', ['locale' => $this->otherLocale()])),
+            ])
             ->authMiddleware([
                 Authenticate::class,
             ]);
+    }
+
+    private function otherLocale(): string
+    {
+        return app()->getLocale() === 'ru' ? 'en' : 'ru';
     }
 }

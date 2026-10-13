@@ -278,4 +278,4 @@ If you discover a security issue, please email gevorgmanukyan349@gmail.com inste
 
 ## License
 
-See [License File](LICENSE.md).
+Notify Rules is commercial software. Each license covers one project, with unlimited local, development and staging environments, and a year of updates. See the [license](LICENSE.md) for the full terms.

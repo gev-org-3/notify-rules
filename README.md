@@ -1,6 +1,6 @@
 # Notify Rules for Filament
 
-![Notify Rules](https://raw.githubusercontent.com/gev-org-3/notify-rules-assets/main/cover.jpg)
+<img class="filament-hidden" src="https://raw.githubusercontent.com/gev-org-3/notify-rules-assets/main/cover.jpg" alt="Notify Rules">
 
 Send Telegram notifications from your Filament panel without writing code.
 Admins create rules right in the panel: **when a record changes, check the conditions, pick the recipients and write the message**. Every message is logged and can be resent.

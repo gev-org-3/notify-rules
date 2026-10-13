@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\HtmlString;
 use JsonSerializable;
+use NumberFormatter;
 use Orion\NotifyRules\Models\NotificationRule;
 use Stringable;
 use Throwable;
@@ -31,7 +32,8 @@ final class TemplateRenderer
 
     public const DATE_FORMAT = 'Y-m-d H:i';
 
-    private const PLACEHOLDER = '/\{\{\s*([A-Za-z_][A-Za-z0-9_]*(?:\.[A-Za-z_][A-Za-z0-9_]*)*)\s*\}\}/';
+    /** {{ path }} or {{ path|filter }} or {{ path|filter:argument }} */
+    private const PLACEHOLDER = '/\{\{\s*([A-Za-z_][A-Za-z0-9_]*(?:\.[A-Za-z_][A-Za-z0-9_]*)*)\s*(?:\|\s*([a-z_]+)(?::([A-Za-z0-9_]+))?\s*)?\}\}/';
 
     private const TAG = '/<(\/?)(b|i|code|a)(?:\s[^>]*)?>/';
 
@@ -45,7 +47,12 @@ final class TemplateRenderer
         $marked = (string) preg_replace_callback(
             self::PLACEHOLDER,
             function (array $match) use (&$values, $model, $rule): string {
-                $values[] = $this->escape($this->format($this->resolve($match[1], $model, $rule)));
+                $value = $this->resolve($match[1], $model, $rule);
+                $filter = $match[2] ?? '';
+
+                $values[] = $this->escape($filter === 'money'
+                    ? $this->money($value, ($match[3] ?? '') ?: null, $model)
+                    : $this->format($value));
 
                 return "\x00" . (count($values) - 1) . "\x00";
             },
@@ -196,6 +203,54 @@ final class TemplateRenderer
             is_scalar($value) => (string) $value,
             default => '',
         };
+    }
+
+    /**
+     * Formats an amount with a currency in the locale of the messages: {{ total|money }} uses the default
+     * currency, {{ total|money:EUR }} a fixed one, {{ total|money:currency }} the record's currency field.
+     */
+    private function money(mixed $value, ?string $currency, Model $model): string
+    {
+        if ($value instanceof BackedEnum) {
+            $value = $value->value;
+        }
+
+        if (! is_numeric($value)) {
+            return $this->format($value);
+        }
+
+        $code = $this->currencyCode($currency, $model);
+        $locale = (string) (config('notify-rules.money.locale') ?: app()->getLocale());
+
+        if (class_exists(NumberFormatter::class)) {
+            $formatted = (new NumberFormatter($locale, NumberFormatter::CURRENCY))->formatCurrency((float) $value, $code);
+
+            if ($formatted !== false) {
+                return $formatted;
+            }
+        }
+
+        return number_format((float) $value, 2, '.', ' ') . ' ' . $code;
+    }
+
+    private function currencyCode(?string $currency, Model $model): string
+    {
+        $isCode = static fn (mixed $code): bool => is_string($code) && preg_match('/^[A-Z]{3}$/', $code) === 1;
+
+        if ($isCode($currency)) {
+            return (string) $currency;
+        }
+
+        if ($currency !== null) {
+            $field = $this->fields->value($model, $currency);
+            $field = $field instanceof BackedEnum ? $field->value : $field;
+
+            if (is_string($field) && $isCode(strtoupper(trim($field)))) {
+                return strtoupper(trim($field));
+            }
+        }
+
+        return strtoupper((string) config('notify-rules.money.currency', 'USD'));
     }
 
     /**

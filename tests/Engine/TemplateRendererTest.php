@@ -131,6 +131,53 @@ it('makes stored messages safe to show in the panel', function (string $stored, 
     'entities stay' => ['1 &lt; 2 &amp; 3', '1 &lt; 2 &amp; 3'],
 ]);
 
+/** ICU uses (narrow) no-break spaces; compare with plain spaces. */
+function plainSpaces(string $text): string
+{
+    return str_replace(["\u{00A0}", "\u{202F}"], ' ', $text);
+}
+
+it('formats money with the default currency in the app locale', function (): void {
+    config()->set('notify-rules.money.currency', 'USD');
+    $order = Order::factory()->create(['total' => 1500]);
+
+    expect(renderTemplate('Total: {{ total|money }}', $order))->toBe('Total: $1,500.00');
+
+    app()->setLocale('ru');
+    config()->set('notify-rules.money.currency', 'RUB');
+
+    expect(plainSpaces(renderTemplate('{{ total | money }}', $order)))->toBe('1 500,00 ₽');
+});
+
+it('formats money in a given currency', function (): void {
+    $order = Order::factory()->create(['total' => 99.5]);
+
+    expect(renderTemplate('{{ total|money:EUR }}', $order))->toBe('€99.50');
+});
+
+it('formats money in the currency of the record', function (): void {
+    config()->set('notify-rules.money.currency', 'USD');
+
+    expect(renderTemplate('{{ total|money:currency }}', Order::factory()->create(['total' => 10, 'currency' => 'eur'])))->toBe('€10.00')
+        ->and(renderTemplate('{{ total|money:currency }}', Order::factory()->create(['total' => 10, 'currency' => null])))->toBe('$10.00')
+        ->and(renderTemplate('{{ total|money:currency }}', Order::factory()->create(['total' => 10, 'currency' => 'nope'])))->toBe('$10.00');
+});
+
+it('uses the configured money locale', function (): void {
+    config()->set('notify-rules.money.locale', 'de_DE');
+
+    expect(plainSpaces(renderTemplate('{{ total|money:EUR }}', Order::factory()->create(['total' => 1234.5]))))->toBe('1.234,50 €');
+});
+
+it('leaves non-numeric values alone with the money filter', function (): void {
+    expect(renderTemplate('[{{ number|money }}][{{ customer_id|money }}]', Order::factory()->create(['number' => 'ORD-1'])))
+        ->toBe('[ORD-1][]');
+});
+
+it('ignores unknown filters', function (): void {
+    expect(renderTemplate('{{ number|upper }}', Order::factory()->create(['number' => 'ord-1'])))->toBe('ord-1');
+});
+
 it('normalizes tag case', function (): void {
     expect(renderTemplate('<B>x</B>'))->toBe('<b>x</b>');
 });

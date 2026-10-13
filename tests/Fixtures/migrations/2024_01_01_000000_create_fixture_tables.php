@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('number');
             $table->string('status');
             $table->decimal('total', 10, 2);
+            $table->string('currency', 3)->nullable();
             $table->foreignId('customer_id')->nullable();
             $table->timestamps();
         });

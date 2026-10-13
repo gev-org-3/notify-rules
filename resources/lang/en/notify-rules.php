@@ -93,7 +93,7 @@ return [
             'template' => [
                 'heading' => 'Message',
                 'template' => 'Template',
-                'help' => 'Use the variables below. Allowed formatting: <b>, <i>, <code>, <a href="https://…">.',
+                'help' => 'Use the variables below; add |money to show an amount with a currency, e.g. {{ total|money }} or {{ total|money:EUR }}. Allowed formatting: <b>, <i>, <code>, <a href="https://…">.',
                 'variables' => 'Variables',
                 'choose_model' => 'Choose a record type to see its variables.',
                 'preview' => 'Preview',

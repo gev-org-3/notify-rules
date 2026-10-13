@@ -24,6 +24,14 @@ return [
         'name' => env('NOTIFY_RULES_QUEUE'),
     ],
 
+    // Used by the {{ field|money }} template filter.
+    'money' => [
+        // ISO 4217 code used when the template does not name a currency.
+        'currency' => env('NOTIFY_RULES_CURRENCY', 'USD'),
+        // Locale for number formatting. Null uses the application locale.
+        'locale' => env('NOTIFY_RULES_MONEY_LOCALE'),
+    ],
+
     'cache' => [
         // Cache store for the active rules of each model. Null uses the default store.
         'store' => env('NOTIFY_RULES_CACHE_STORE'),

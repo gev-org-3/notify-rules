@@ -139,7 +139,7 @@ it('offers only readable columns of the chosen model', function (): void {
     Livewire::test(CreateNotificationRule::class)
         ->fillForm(['model_type' => Order::class, 'event' => RuleEvent::FieldChanged->value])
         ->assertFormFieldExists('watched_field', function ($field): bool {
-            return array_keys($field->getOptions()) === ['id', 'number', 'status', 'total', 'customer_id', 'created_at', 'updated_at'];
+            return array_keys($field->getOptions()) === ['id', 'number', 'status', 'total', 'currency', 'customer_id', 'created_at', 'updated_at'];
         });
 });
 

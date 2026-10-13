@@ -74,6 +74,7 @@ final class RuleFormOptions
         return [
             ...array_map(static fn (string $column): string => "{{ {$column} }}", $columns),
             ...array_map(static fn (string $relation): string => "{{ {$relation}.… }}", $this->fields->singleRelations($model)),
+            '{{ …|money }}',
             '{{ old.… }}',
             '{{ url }}',
             '{{ rule.name }}',

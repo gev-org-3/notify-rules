@@ -42,7 +42,7 @@ final class DatabaseSeeder extends Seeder
             'event' => 'created',
             'conditions' => ['match' => 'all', 'items' => [['field' => 'total', 'operator' => '>', 'value' => '1000']]],
             'recipients' => ['users' => [$admin->getKey()]],
-            'template' => "<b>New order {{ number }}</b>\nTotal: {{ total }}\nCustomer: {{ customer.name }}\n{{ url }}",
+            'template' => "<b>New order {{ number }}</b>\nTotal: {{ total|money }}\nCustomer: {{ customer.name }}\n{{ url }}",
         ]);
 
         NotificationRule::query()->create([

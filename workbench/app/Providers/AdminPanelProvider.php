@@ -23,6 +23,7 @@ use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Support\Facades\Route;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Orion\NotifyRules\NotifyRulesPlugin;
+use Workbench\App\Filament\Resources\Orders\OrderResource;
 use Workbench\App\Http\Middleware\SetLocale;
 use Workbench\App\Models\Order;
 use Workbench\App\Models\User;
@@ -49,6 +50,9 @@ final class AdminPanelProvider extends PanelProvider
             ])
             ->pages([
                 Dashboard::class,
+            ])
+            ->resources([
+                OrderResource::class,
             ])
             ->plugin(
                 NotifyRulesPlugin::make()

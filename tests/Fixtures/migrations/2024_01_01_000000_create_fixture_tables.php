@@ -20,8 +20,20 @@ return new class extends Migration
             $table->timestamps();
         });
 
+        Schema::create('teams', function (Blueprint $table): void {
+            $table->id();
+            $table->string('name');
+            $table->timestamps();
+        });
+
+        Schema::create('team_user', function (Blueprint $table): void {
+            $table->foreignId('team_id');
+            $table->foreignId('user_id');
+        });
+
         Schema::create('orders', function (Blueprint $table): void {
             $table->id();
+            $table->foreignId('team_id')->nullable();
             $table->string('number');
             $table->string('status');
             $table->decimal('total', 10, 2);

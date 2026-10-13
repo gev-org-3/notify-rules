@@ -139,7 +139,7 @@ it('offers only readable columns of the chosen model', function (): void {
     Livewire::test(CreateNotificationRule::class)
         ->fillForm(['model_type' => Order::class, 'event' => RuleEvent::FieldChanged->value])
         ->assertFormFieldExists('watched_field', function ($field): bool {
-            return array_keys($field->getOptions()) === ['id', 'number', 'status', 'total', 'currency', 'customer_id', 'created_at', 'updated_at'];
+            return array_keys($field->getOptions()) === ['id', 'team_id', 'number', 'status', 'total', 'currency', 'customer_id', 'created_at', 'updated_at'];
         });
 });
 
@@ -283,3 +283,32 @@ it('is in the configured navigation group', function (): void {
 
     $this->get(NotificationRuleResource::getUrl('index'))->assertSuccessful();
 });
+
+it('lets the app replace the package policy', function (): void {
+    Gate::policy(NotificationRule::class, ReadOnlyRulePolicy::class);
+    $rule = makeRule();
+
+    expect(NotificationRuleResource::canViewAny())->toBeTrue()
+        ->and(NotificationRuleResource::canCreate())->toBeFalse()
+        ->and(NotificationRuleResource::canEdit($rule))->toBeFalse();
+
+    $this->get(NotificationRuleResource::getUrl('create'))->assertForbidden();
+});
+
+final class ReadOnlyRulePolicy
+{
+    public function viewAny(User $user): bool
+    {
+        return true;
+    }
+
+    public function create(User $user): bool
+    {
+        return false;
+    }
+
+    public function update(User $user, NotificationRule $rule): bool
+    {
+        return false;
+    }
+}

@@ -44,6 +44,11 @@ return new class extends Migration
 
         Schema::create(config('notify-rules.tables.deliveries'), function (Blueprint $table): void {
             $table->id();
+
+            if ($tenantColumn = config('notify-rules.tenancy.column')) {
+                $table->unsignedBigInteger($tenantColumn)->nullable()->index();
+            }
+
             $table->foreignId('rule_id')->nullable()->index();
             $table->string('channel', 32)->default('telegram');
             $table->string('chat_id');

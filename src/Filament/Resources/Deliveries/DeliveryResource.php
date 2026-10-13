@@ -9,7 +9,6 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Model;
 use Orion\NotifyRules\Filament\Resources\Concerns\AuthorizesRuleManagers;
 use Orion\NotifyRules\Filament\Resources\Deliveries\Pages\ListDeliveries;
 use Orion\NotifyRules\Filament\Resources\Deliveries\Schemas\DeliveryInfolist;
@@ -39,26 +38,6 @@ final class DeliveryResource extends Resource
     public static function getPluralModelLabel(): string
     {
         return __('notify-rules::notify-rules.deliveries.plural_model_label');
-    }
-
-    public static function canCreate(): bool
-    {
-        return false;
-    }
-
-    public static function canEdit(Model $record): bool
-    {
-        return false;
-    }
-
-    public static function canDelete(Model $record): bool
-    {
-        return false;
-    }
-
-    public static function canDeleteAny(): bool
-    {
-        return false;
     }
 
     public static function infolist(Schema $schema): Schema

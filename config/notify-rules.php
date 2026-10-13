@@ -43,6 +43,9 @@ return [
         'deliveries' => 'notify_deliveries',
     ],
 
+    // Days the delivery log is kept by notify-rules:prune.
+    'prune_after_days' => 30,
+
     'tenancy' => [
         // Column on the rules table that stores the tenant key. Null when the panel has no tenancy.
         'column' => null,

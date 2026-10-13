@@ -4,52 +4,29 @@ declare(strict_types=1);
 
 namespace Orion\NotifyRules\Filament\Resources\Concerns;
 
-use Filament\Facades\Filament;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use Orion\NotifyRules\NotifyRulesPlugin;
+use Orion\NotifyRules\Support\Tenancy;
 
 /**
- * Access requires the plugin's canManageRules() callback and, when the app defines one, the model policy.
+ * Access is decided by the model policies (NotificationRulePolicy and DeliveryPolicy unless the app
+ * defines its own). Records are scoped to the current tenant through the column set in
+ * notify-rules.tenancy.column, not through a Filament ownership relationship.
  */
 trait AuthorizesRuleManagers
 {
-    public static function canViewAny(): bool
+    public static function isScopedToTenant(): bool
     {
-        return static::userCanManageRules() && parent::canViewAny();
+        return false;
     }
 
-    public static function canView(Model $record): bool
+    public static function getEloquentQuery(): Builder
     {
-        return static::userCanManageRules() && parent::canView($record);
-    }
-
-    public static function canCreate(): bool
-    {
-        return static::userCanManageRules() && parent::canCreate();
-    }
-
-    public static function canEdit(Model $record): bool
-    {
-        return static::userCanManageRules() && parent::canEdit($record);
-    }
-
-    public static function canDelete(Model $record): bool
-    {
-        return static::userCanManageRules() && parent::canDelete($record);
-    }
-
-    public static function canDeleteAny(): bool
-    {
-        return static::userCanManageRules() && parent::canDeleteAny();
+        return app(Tenancy::class)->scopeToCurrent(parent::getEloquentQuery());
     }
 
     public static function getNavigationGroup(): ?string
     {
         return NotifyRulesPlugin::get()->getNavigationGroup();
-    }
-
-    protected static function userCanManageRules(): bool
-    {
-        return NotifyRulesPlugin::get()->userCanManageRules(Filament::auth()->user());
     }
 }

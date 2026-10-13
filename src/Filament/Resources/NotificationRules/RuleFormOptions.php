@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Orion\NotifyRules\Filament\Resources\NotificationRules;
 
+use Filament\Facades\Filament;
+use Filament\Models\Contracts\HasTenants;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
@@ -123,6 +125,13 @@ final class RuleFormOptions
      */
     private function labelUsers(Collection $users): array
     {
+        // In a tenant panel only the tenant's users may be notified.
+        $tenant = Filament::getTenant();
+
+        if ($tenant !== null) {
+            $users = $users->filter(static fn (Model $user): bool => ! $user instanceof HasTenants || $user->canAccessTenant($tenant));
+        }
+
         if ($users->isEmpty()) {
             return [];
         }

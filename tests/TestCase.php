@@ -21,6 +21,7 @@ use Orchestra\Testbench\TestCase as Orchestra;
 use Orion\NotifyRules\NotifyRulesServiceProvider;
 use Orion\NotifyRules\Tests\Fixtures\Models\User;
 use Orion\NotifyRules\Tests\Fixtures\Providers\AdminPanelProvider;
+use Orion\NotifyRules\Tests\Fixtures\Providers\TeamPanelProvider;
 use RyanChandler\BladeCaptureDirective\BladeCaptureDirectiveServiceProvider;
 
 abstract class TestCase extends Orchestra
@@ -45,6 +46,7 @@ abstract class TestCase extends Orchestra
             WidgetsServiceProvider::class,
             NotifyRulesServiceProvider::class,
             AdminPanelProvider::class,
+            TeamPanelProvider::class,
         ];
     }
 
@@ -62,6 +64,8 @@ abstract class TestCase extends Orchestra
         $app['config']->set('notify-rules.telegram.bot_token', 'test-token');
         $app['config']->set('notify-rules.telegram.bot_username', 'notify_rules_test_bot');
         $app['config']->set('notify-rules.telegram.webhook_secret', 'test-secret');
+        // The team panel uses tenancy; rules and deliveries of the admin panel have no tenant.
+        $app['config']->set('notify-rules.tenancy.column', 'team_id');
     }
 
     protected function defineDatabaseMigrations(): void

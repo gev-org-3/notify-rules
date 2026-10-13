@@ -14,9 +14,11 @@ use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Gate;
 use Orion\NotifyRules\Enums\DeliveryStatus;
 use Orion\NotifyRules\Enums\RuleEvent;
 use Orion\NotifyRules\Filament\Resources\NotificationRules\RuleFormOptions;
+use Orion\NotifyRules\Models\NotificationRule;
 
 final class NotificationRulesTable
 {
@@ -41,7 +43,9 @@ final class NotificationRulesTable
                     ->badge()
                     ->color('gray'),
                 ToggleColumn::make('is_active')
-                    ->label(__(self::T . 'is_active')),
+                    ->label(__(self::T . 'is_active'))
+                    // Inline columns skip the policy checks that actions get.
+                    ->disabled(fn (NotificationRule $record): bool => Gate::denies('update', $record)),
                 TextColumn::make('deliveries_count')
                     ->label(__(self::T . 'sent_last_7_days'))
                     ->counts([

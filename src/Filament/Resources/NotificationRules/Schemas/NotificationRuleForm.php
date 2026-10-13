@@ -138,7 +138,17 @@ final class NotificationRuleForm
                     ->searchable()
                     ->options(fn (): array => self::options()->users())
                     ->getSearchResultsUsing(fn (string $search): array => self::options()->users($search))
-                    ->getOptionLabelsUsing(fn (array $values): array => self::options()->userLabels($values)),
+                    ->getOptionLabelsUsing(fn (array $values): array => self::options()->userLabels($values))
+                    ->rules([
+                        fn (): Closure => function (string $attribute, mixed $value, Closure $fail): void {
+                            $ids = array_map('strval', (array) $value);
+                            $allowed = array_map('strval', array_keys(self::options()->userLabels($ids)));
+
+                            if (array_diff($ids, $allowed) !== []) {
+                                $fail(__(self::T . 'recipients.users_invalid'));
+                            }
+                        },
+                    ]),
                 TagsInput::make('recipients.roles')
                     ->label(__(self::T . 'recipients.roles'))
                     ->helperText(__(self::T . 'recipients.roles_help')),

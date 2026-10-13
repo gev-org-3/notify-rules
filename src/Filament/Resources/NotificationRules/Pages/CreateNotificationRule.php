@@ -8,6 +8,7 @@ use Filament\Resources\Pages\CreateRecord;
 use Orion\NotifyRules\Filament\Resources\NotificationRules\Actions\SendTestMessageAction;
 use Orion\NotifyRules\Filament\Resources\NotificationRules\NotificationRuleResource;
 use Orion\NotifyRules\Filament\Resources\NotificationRules\Pages\Concerns\NormalizesRuleData;
+use Orion\NotifyRules\Support\Tenancy;
 
 final class CreateNotificationRule extends CreateRecord
 {
@@ -24,6 +25,6 @@ final class CreateNotificationRule extends CreateRecord
 
     protected function mutateFormDataBeforeCreate(array $data): array
     {
-        return $this->normalizeRuleData($data);
+        return app(Tenancy::class)->withCurrentKey($this->normalizeRuleData($data));
     }
 }

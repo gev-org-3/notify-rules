@@ -4,10 +4,13 @@ declare(strict_types=1);
 
 namespace Orion\NotifyRules\Engine;
 
+use Filament\Facades\Filament;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Orion\NotifyRules\Jobs\SendTelegramMessage;
 use Orion\NotifyRules\Models\Delivery;
 use Orion\NotifyRules\Models\NotificationRule;
+use Orion\NotifyRules\Support\Tenancy;
 use Orion\NotifyRules\Telegram\TelegramLinkManager;
 
 /**
@@ -18,6 +21,8 @@ final class RuleTester
     public function __construct(
         private readonly TemplateRenderer $renderer,
         private readonly TelegramLinkManager $links,
+        private readonly Tenancy $tenancy,
+        private readonly ModelEventRegistrar $registrar,
     ) {}
 
     /**
@@ -27,8 +32,22 @@ final class RuleTester
     {
         /** @var Model $model */
         $model = new $modelType;
+        $query = $modelType::query()->latest($model->qualifyColumn($model->getKeyName()));
 
-        return $modelType::query()->latest($model->getKeyName())->first();
+        // In a tenant panel the preview must only ever show the current tenant's records.
+        $tenant = $this->tenancy->enabled() ? Filament::getTenant() : null;
+
+        if ($tenant !== null) {
+            $relationship = $this->registrar->tenantRelationship($modelType);
+
+            if ($relationship === null) {
+                return null;
+            }
+
+            $query->whereHas($relationship, fn (Builder $query): Builder => $query->whereKey($tenant->getKey()));
+        }
+
+        return $query->first();
     }
 
     /**
@@ -57,13 +76,13 @@ final class RuleTester
 
         $record = $this->sampleRecord($rule->model_type);
 
-        $delivery = Delivery::query()->create([
+        $delivery = Delivery::query()->create($this->tenancy->withCurrentKey([
             'rule_id' => $rule->exists ? $rule->getKey() : null,
             'chat_id' => $link->chat_id,
             'subject_type' => $record?->getMorphClass(),
             'subject_id' => $record?->getKey(),
             'message' => $this->preview($rule),
-        ]);
+        ]));
 
         SendTelegramMessage::dispatchSync($delivery);
 

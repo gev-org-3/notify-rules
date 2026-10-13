@@ -89,6 +89,7 @@ return [
                 'chat_id_invalid' => '":value" is not a Telegram chat ID.',
                 'telegram_connected' => 'Telegram connected',
                 'telegram_not_connected' => 'no Telegram',
+                'users_invalid' => 'Some of the selected users cannot be notified from here.',
             ],
             'template' => [
                 'heading' => 'Message',

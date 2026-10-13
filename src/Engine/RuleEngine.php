@@ -9,6 +9,7 @@ use Orion\NotifyRules\Enums\RuleEvent;
 use Orion\NotifyRules\Jobs\SendTelegramMessage;
 use Orion\NotifyRules\Models\Delivery;
 use Orion\NotifyRules\Models\NotificationRule;
+use Orion\NotifyRules\Support\Tenancy;
 use Throwable;
 
 /**
@@ -23,6 +24,8 @@ final class RuleEngine
         private readonly RecipientResolver $recipients,
         private readonly TemplateRenderer $renderer,
         private readonly ModelFields $fields,
+        private readonly ModelEventRegistrar $registrar,
+        private readonly Tenancy $tenancy,
     ) {}
 
     /**
@@ -36,7 +39,7 @@ final class RuleEngine
 
         $deliveries = [];
 
-        foreach ($this->rules->activeFor($model::class) as $rule) {
+        foreach ($this->rulesFor($model) as $rule) {
             // A broken rule must never break saving the model it watches.
             try {
                 if ($this->matches($rule, $eloquentEvent, $model)) {
@@ -48,6 +51,31 @@ final class RuleEngine
         }
 
         return $deliveries;
+    }
+
+    /**
+     * The active rules of the model's class. With tenancy, a record only runs its own tenant's rules and the
+     * global ones. If the tenant of the record cannot be determined, only global rules run: a rule of one
+     * tenant must never see another tenant's data.
+     *
+     * @return iterable<int, NotificationRule>
+     */
+    private function rulesFor(Model $model): iterable
+    {
+        $rules = $this->rules->activeFor($model::class);
+
+        if (! $this->tenancy->enabled()) {
+            return $rules;
+        }
+
+        $relationship = $this->registrar->tenantRelationship($model::class);
+        $tenantKey = $relationship === null ? null : $this->tenancy->keyOfRecord($model, $relationship);
+
+        return $rules->filter(function (NotificationRule $rule) use ($tenantKey): bool {
+            $ruleTenant = $this->tenancy->keyOf($rule);
+
+            return $ruleTenant === null || ($tenantKey !== null && (string) $ruleTenant === (string) $tenantKey);
+        });
     }
 
     public function matches(NotificationRule $rule, string $eloquentEvent, Model $model): bool
@@ -84,13 +112,13 @@ final class RuleEngine
         $deliveries = [];
 
         foreach ($chatIds as $chatId) {
-            $delivery = Delivery::query()->create([
+            $delivery = Delivery::query()->create($this->withTenant($rule, [
                 'rule_id' => $rule->getKey(),
                 'chat_id' => $chatId,
                 'subject_type' => $model->getMorphClass(),
                 'subject_id' => $model->getKey(),
                 'message' => $message,
-            ]);
+            ]));
 
             dispatch(new SendTelegramMessage($delivery));
 
@@ -98,6 +126,19 @@ final class RuleEngine
         }
 
         return $deliveries;
+    }
+
+    /**
+     * @param  array<string, mixed>  $attributes
+     * @return array<string, mixed>
+     */
+    private function withTenant(NotificationRule $rule, array $attributes): array
+    {
+        if ($this->tenancy->enabled()) {
+            $attributes[(string) $this->tenancy->column()] = $this->tenancy->keyOf($rule);
+        }
+
+        return $attributes;
     }
 
     private function onlyTimestampsChanged(Model $model): bool

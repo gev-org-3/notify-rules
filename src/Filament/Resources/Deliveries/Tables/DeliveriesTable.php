@@ -17,8 +17,10 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Gate;
 use Orion\NotifyRules\Enums\DeliveryStatus;
 use Orion\NotifyRules\Models\Delivery;
+use Orion\NotifyRules\Support\Tenancy;
 
 final class DeliveriesTable
 {
@@ -62,7 +64,7 @@ final class DeliveriesTable
                     ->options(DeliveryStatus::class),
                 SelectFilter::make('rule')
                     ->label(__(self::T . 'fields.rule'))
-                    ->relationship('rule', 'name')
+                    ->relationship('rule', 'name', fn (Builder $query): Builder => app(Tenancy::class)->scopeToCurrent($query))
                     ->searchable()
                     ->preload(),
                 Filter::make('period')
@@ -112,6 +114,7 @@ final class DeliveriesTable
             ->icon(Heroicon::OutlinedArrowPath)
             ->color('gray')
             ->visible(fn (Delivery $record): bool => $record->canBeResent())
+            ->authorize('resend')
             ->requiresConfirmation()
             ->action(function (Delivery $record): void {
                 $record->resend();
@@ -131,7 +134,7 @@ final class DeliveriesTable
             ->requiresConfirmation()
             ->deselectRecordsAfterCompletion()
             ->action(function (Collection $records): void {
-                $failed = $records->filter(fn (Delivery $record): bool => $record->canBeResent());
+                $failed = $records->filter(fn (Delivery $record): bool => Gate::allows('resend', $record));
 
                 $failed->each(fn (Delivery $record) => $record->resend());
 

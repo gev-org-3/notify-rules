@@ -13,9 +13,11 @@ use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use InvalidArgumentException;
+use LogicException;
 use Orion\NotifyRules\Filament\Pages\TelegramConnection;
 use Orion\NotifyRules\Filament\Resources\Deliveries\DeliveryResource;
 use Orion\NotifyRules\Filament\Resources\NotificationRules\NotificationRuleResource;
+use Orion\NotifyRules\Support\Tenancy;
 
 final class NotifyRulesPlugin implements Plugin
 {
@@ -60,7 +62,18 @@ final class NotifyRulesPlugin implements Plugin
 
     public function boot(Panel $panel): void
     {
-        //
+        if (! $panel->hasTenancy()) {
+            return;
+        }
+
+        // Without these, rules of one tenant could be shown or sent to another.
+        if (! app(Tenancy::class)->enabled()) {
+            throw new LogicException("The [{$panel->getId()}] panel uses tenancy: set notify-rules.tenancy.column before running the Notify Rules migration.");
+        }
+
+        if ($this->tenantOwnershipRelationship === null) {
+            throw new LogicException("The [{$panel->getId()}] panel uses tenancy: call ->tenantOwnership('relationship') on NotifyRulesPlugin with the relationship from your models to the tenant.");
+        }
     }
 
     public static function make(): static

@@ -18,14 +18,22 @@ final class ModelEventRegistrar
     /** @var array<class-string<Model>, true> */
     private array $registered = [];
 
+    /** @var array<class-string<Model>, string> Model => relationship to its tenant */
+    private array $tenantRelationships = [];
+
     public function __construct(private readonly Dispatcher $events) {}
 
     /**
      * @param  array<int, class-string<Model>>  $models
+     * @param  string|null  $tenantRelationship  The relationship from these models to the panel's tenant.
      */
-    public function register(array $models): void
+    public function register(array $models, ?string $tenantRelationship = null): void
     {
         foreach ($models as $model) {
+            if ($tenantRelationship !== null) {
+                $this->tenantRelationships[$model] ??= $tenantRelationship;
+            }
+
             if (isset($this->registered[$model])) {
                 continue;
             }
@@ -49,5 +57,10 @@ final class ModelEventRegistrar
     public function registered(): array
     {
         return array_keys($this->registered);
+    }
+
+    public function tenantRelationship(string $model): ?string
+    {
+        return $this->tenantRelationships[$model] ?? null;
     }
 }

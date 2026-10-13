@@ -31,6 +31,14 @@ final class Order extends Model
         return $this->belongsTo(User::class, 'customer_id');
     }
 
+    /**
+     * @return BelongsTo<Team, $this>
+     */
+    public function team(): BelongsTo
+    {
+        return $this->belongsTo(Team::class);
+    }
+
     protected static function newFactory(): OrderFactory
     {
         return OrderFactory::new();

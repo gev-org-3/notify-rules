@@ -89,6 +89,7 @@ return [
                 'chat_id_invalid' => '«:value» — не ID чата Telegram.',
                 'telegram_connected' => 'Telegram подключён',
                 'telegram_not_connected' => 'без Telegram',
+                'users_invalid' => 'Некоторым из выбранных пользователей нельзя отправлять уведомления отсюда.',
             ],
             'template' => [
                 'heading' => 'Сообщение',

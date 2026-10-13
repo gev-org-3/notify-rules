@@ -6,12 +6,12 @@ use Filament\Actions\Testing\TestAction;
 use Filament\Facades\Filament;
 use Illuminate\Support\Facades\Http;
 use Livewire\Livewire;
-use Orion\NotifyRules\Enums\DeliveryStatus;
-use Orion\NotifyRules\Filament\Resources\Deliveries\DeliveryResource;
-use Orion\NotifyRules\Filament\Resources\Deliveries\Pages\ListDeliveries;
-use Orion\NotifyRules\Models\Delivery;
-use Orion\NotifyRules\Telegram\TelegramLinkManager;
-use Orion\NotifyRules\Tests\Fixtures\Models\User;
+use OrionSoft\NotifyRules\Enums\DeliveryStatus;
+use OrionSoft\NotifyRules\Filament\Resources\Deliveries\DeliveryResource;
+use OrionSoft\NotifyRules\Filament\Resources\Deliveries\Pages\ListDeliveries;
+use OrionSoft\NotifyRules\Models\Delivery;
+use OrionSoft\NotifyRules\Telegram\TelegramLinkManager;
+use OrionSoft\NotifyRules\Tests\Fixtures\Models\User;
 
 beforeEach(function (): void {
     Filament::setCurrentPanel(Filament::getPanel('admin'));

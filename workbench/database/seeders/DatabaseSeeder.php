@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Workbench\Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Orion\NotifyRules\Models\NotificationRule;
+use OrionSoft\NotifyRules\Models\NotificationRule;
 use Workbench\App\Models\Order;
 use Workbench\App\Models\User;
 

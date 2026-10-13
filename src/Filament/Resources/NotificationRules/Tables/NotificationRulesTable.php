@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Orion\NotifyRules\Filament\Resources\NotificationRules\Tables;
+namespace OrionSoft\NotifyRules\Filament\Resources\NotificationRules\Tables;
 
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
@@ -15,10 +15,10 @@ use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Gate;
-use Orion\NotifyRules\Enums\DeliveryStatus;
-use Orion\NotifyRules\Enums\RuleEvent;
-use Orion\NotifyRules\Filament\Resources\NotificationRules\RuleFormOptions;
-use Orion\NotifyRules\Models\NotificationRule;
+use OrionSoft\NotifyRules\Enums\DeliveryStatus;
+use OrionSoft\NotifyRules\Enums\RuleEvent;
+use OrionSoft\NotifyRules\Filament\Resources\NotificationRules\RuleFormOptions;
+use OrionSoft\NotifyRules\Models\NotificationRule;
 
 final class NotificationRulesTable
 {

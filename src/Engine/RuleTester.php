@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Orion\NotifyRules\Engine;
+namespace OrionSoft\NotifyRules\Engine;
 
 use Filament\Facades\Filament;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Orion\NotifyRules\Jobs\SendTelegramMessage;
-use Orion\NotifyRules\Models\Delivery;
-use Orion\NotifyRules\Models\NotificationRule;
-use Orion\NotifyRules\Support\Tenancy;
-use Orion\NotifyRules\Telegram\TelegramLinkManager;
+use OrionSoft\NotifyRules\Jobs\SendTelegramMessage;
+use OrionSoft\NotifyRules\Models\Delivery;
+use OrionSoft\NotifyRules\Models\NotificationRule;
+use OrionSoft\NotifyRules\Support\Tenancy;
+use OrionSoft\NotifyRules\Telegram\TelegramLinkManager;
 
 /**
  * Previews a rule on the latest record of its model and sends test messages to the current user.

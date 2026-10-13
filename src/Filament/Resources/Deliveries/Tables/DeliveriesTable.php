@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Orion\NotifyRules\Filament\Resources\Deliveries\Tables;
+namespace OrionSoft\NotifyRules\Filament\Resources\Deliveries\Tables;
 
 use Filament\Actions\Action;
 use Filament\Actions\BulkAction;
@@ -18,9 +18,9 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Gate;
-use Orion\NotifyRules\Enums\DeliveryStatus;
-use Orion\NotifyRules\Models\Delivery;
-use Orion\NotifyRules\Support\Tenancy;
+use OrionSoft\NotifyRules\Enums\DeliveryStatus;
+use OrionSoft\NotifyRules\Models\Delivery;
+use OrionSoft\NotifyRules\Support\Tenancy;
 
 final class DeliveriesTable
 {

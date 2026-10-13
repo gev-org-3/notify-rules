@@ -1,7 +1,7 @@
 laravel: '@testbench'
 
 providers:
-  - Orion\NotifyRules\NotifyRulesServiceProvider
+  - OrionSoft\NotifyRules\NotifyRulesServiceProvider
   - Workbench\App\Providers\AdminPanelProvider
 
 migrations:

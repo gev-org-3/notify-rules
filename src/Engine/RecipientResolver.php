@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Orion\NotifyRules\Engine;
+namespace OrionSoft\NotifyRules\Engine;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
-use Orion\NotifyRules\Engine\Roles\RoleUserResolver;
-use Orion\NotifyRules\Models\NotificationRule;
-use Orion\NotifyRules\Models\TelegramLink;
+use OrionSoft\NotifyRules\Engine\Roles\RoleUserResolver;
+use OrionSoft\NotifyRules\Models\NotificationRule;
+use OrionSoft\NotifyRules\Models\TelegramLink;
 
 final class RecipientResolver
 {

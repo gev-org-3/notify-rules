@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Orion\NotifyRules\Http\Controllers;
+namespace OrionSoft\NotifyRules\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Orion\NotifyRules\Telegram\UpdateHandler;
+use OrionSoft\NotifyRules\Telegram\UpdateHandler;
 
 final class TelegramWebhookController
 {

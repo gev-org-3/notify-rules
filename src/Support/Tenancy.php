@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Orion\NotifyRules\Support;
+namespace OrionSoft\NotifyRules\Support;
 
 use Filament\Facades\Filament;
 use Illuminate\Database\Eloquent\Builder;

@@ -6,15 +6,15 @@ use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
-use Orion\NotifyRules\Engine\ModelEventRegistrar;
-use Orion\NotifyRules\Engine\Roles\RoleUserResolver;
-use Orion\NotifyRules\Engine\RuleRepository;
-use Orion\NotifyRules\Enums\DeliveryStatus;
-use Orion\NotifyRules\Models\Delivery;
-use Orion\NotifyRules\Models\NotificationRule;
-use Orion\NotifyRules\NotifyRulesPlugin;
-use Orion\NotifyRules\Tests\Fixtures\Models\Order;
-use Orion\NotifyRules\Tests\Fixtures\Models\User;
+use OrionSoft\NotifyRules\Engine\ModelEventRegistrar;
+use OrionSoft\NotifyRules\Engine\Roles\RoleUserResolver;
+use OrionSoft\NotifyRules\Engine\RuleRepository;
+use OrionSoft\NotifyRules\Enums\DeliveryStatus;
+use OrionSoft\NotifyRules\Models\Delivery;
+use OrionSoft\NotifyRules\Models\NotificationRule;
+use OrionSoft\NotifyRules\NotifyRulesPlugin;
+use OrionSoft\NotifyRules\Tests\Fixtures\Models\Order;
+use OrionSoft\NotifyRules\Tests\Fixtures\Models\User;
 
 beforeEach(function (): void {
     Http::fake(['*' => Http::response(['ok' => true, 'result' => ['message_id' => 77]])]);

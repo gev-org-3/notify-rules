@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Orion\NotifyRules\Telegram;
+namespace OrionSoft\NotifyRules\Telegram;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use LogicException;
-use Orion\NotifyRules\Models\TelegramLink;
+use OrionSoft\NotifyRules\Models\TelegramLink;
 
 /**
  * Connects users to Telegram chats through one-time "/start {token}" deep links.

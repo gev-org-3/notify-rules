@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Orion\NotifyRules\Jobs;
+namespace OrionSoft\NotifyRules\Jobs;
 
 use DateTimeInterface;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
 use Illuminate\Queue\Jobs\SyncJob;
 use Illuminate\Queue\Middleware\RateLimited;
-use Orion\NotifyRules\Enums\DeliveryStatus;
-use Orion\NotifyRules\Models\Delivery;
-use Orion\NotifyRules\Models\TelegramLink;
-use Orion\NotifyRules\Telegram\TelegramClient;
-use Orion\NotifyRules\Telegram\TelegramException;
+use OrionSoft\NotifyRules\Enums\DeliveryStatus;
+use OrionSoft\NotifyRules\Models\Delivery;
+use OrionSoft\NotifyRules\Models\TelegramLink;
+use OrionSoft\NotifyRules\Telegram\TelegramClient;
+use OrionSoft\NotifyRules\Telegram\TelegramException;
 use Throwable;
 
 /**

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Orion\NotifyRules\Models;
+namespace OrionSoft\NotifyRules\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;

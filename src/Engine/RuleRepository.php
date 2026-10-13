@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Orion\NotifyRules\Engine;
+namespace OrionSoft\NotifyRules\Engine;
 
 use Illuminate\Contracts\Cache\Repository as Cache;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Cache as CacheFacade;
-use Orion\NotifyRules\Models\NotificationRule;
+use OrionSoft\NotifyRules\Models\NotificationRule;
 
 /**
  * Caches the active rules of each model, so that saving a model does not query the rules table.

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Orion\NotifyRules\Tests\Fixtures\Providers;
+namespace OrionSoft\NotifyRules\Tests\Fixtures\Providers;
 
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -17,8 +17,8 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
-use Orion\NotifyRules\NotifyRulesPlugin;
-use Orion\NotifyRules\Tests\Fixtures\Models\Order;
+use OrionSoft\NotifyRules\NotifyRulesPlugin;
+use OrionSoft\NotifyRules\Tests\Fixtures\Models\Order;
 
 final class AdminPanelProvider extends PanelProvider
 {

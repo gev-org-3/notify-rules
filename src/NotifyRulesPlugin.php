@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Orion\NotifyRules;
+namespace OrionSoft\NotifyRules;
 
 use Closure;
 use Filament\Actions\Action;
@@ -14,10 +14,10 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use InvalidArgumentException;
 use LogicException;
-use Orion\NotifyRules\Filament\Pages\TelegramConnection;
-use Orion\NotifyRules\Filament\Resources\Deliveries\DeliveryResource;
-use Orion\NotifyRules\Filament\Resources\NotificationRules\NotificationRuleResource;
-use Orion\NotifyRules\Support\Tenancy;
+use OrionSoft\NotifyRules\Filament\Pages\TelegramConnection;
+use OrionSoft\NotifyRules\Filament\Resources\Deliveries\DeliveryResource;
+use OrionSoft\NotifyRules\Filament\Resources\NotificationRules\NotificationRuleResource;
+use OrionSoft\NotifyRules\Support\Tenancy;
 
 final class NotifyRulesPlugin implements Plugin
 {
@@ -106,7 +106,7 @@ final class NotifyRulesPlugin implements Plugin
             }
 
             // Rules on the package's own models would trigger themselves.
-            if (str_starts_with($model, 'Orion\\NotifyRules\\Models\\')) {
+            if (str_starts_with($model, 'OrionSoft\\NotifyRules\\Models\\')) {
                 throw new InvalidArgumentException("[{$model}] belongs to Notify Rules and cannot have rules.");
             }
 

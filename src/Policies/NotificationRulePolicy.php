@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Orion\NotifyRules\Policies;
+namespace OrionSoft\NotifyRules\Policies;
 
 use Illuminate\Contracts\Auth\Authenticatable;
-use Orion\NotifyRules\Models\NotificationRule;
-use Orion\NotifyRules\Policies\Concerns\ChecksRuleManagers;
+use OrionSoft\NotifyRules\Models\NotificationRule;
+use OrionSoft\NotifyRules\Policies\Concerns\ChecksRuleManagers;
 
 /**
  * Registered unless the app defines its own policy for NotificationRule.

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Orion\NotifyRules\Models\Delivery;
+use OrionSoft\NotifyRules\Models\Delivery;
 
 function oldDelivery(int $daysAgo, string $status = 'sent'): Delivery
 {

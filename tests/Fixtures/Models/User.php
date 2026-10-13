@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Orion\NotifyRules\Tests\Fixtures\Models;
+namespace OrionSoft\NotifyRules\Tests\Fixtures\Models;
 
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Models\Contracts\HasTenants;
@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Collection;
-use Orion\NotifyRules\Tests\Fixtures\Factories\UserFactory;
+use OrionSoft\NotifyRules\Tests\Fixtures\Factories\UserFactory;
 
 final class User extends Authenticatable implements FilamentUser, HasTenants
 {

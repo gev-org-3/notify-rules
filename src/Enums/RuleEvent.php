@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Orion\NotifyRules\Enums;
+namespace OrionSoft\NotifyRules\Enums;
 
 use Filament\Support\Contracts\HasLabel;
 

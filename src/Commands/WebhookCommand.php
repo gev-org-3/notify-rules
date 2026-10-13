@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Orion\NotifyRules\Commands;
+namespace OrionSoft\NotifyRules\Commands;
 
 use Illuminate\Console\Command;
-use Orion\NotifyRules\Telegram\TelegramClient;
-use Orion\NotifyRules\Telegram\TelegramException;
+use OrionSoft\NotifyRules\Telegram\TelegramClient;
+use OrionSoft\NotifyRules\Telegram\TelegramException;
 
 final class WebhookCommand extends Command
 {

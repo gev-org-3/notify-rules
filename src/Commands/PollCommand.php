@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Orion\NotifyRules\Commands;
+namespace OrionSoft\NotifyRules\Commands;
 
 use Illuminate\Console\Command;
-use Orion\NotifyRules\Telegram\TelegramClient;
-use Orion\NotifyRules\Telegram\TelegramException;
-use Orion\NotifyRules\Telegram\UpdateHandler;
+use OrionSoft\NotifyRules\Telegram\TelegramClient;
+use OrionSoft\NotifyRules\Telegram\TelegramException;
+use OrionSoft\NotifyRules\Telegram\UpdateHandler;
 
 /**
  * Long polling for local development, where Telegram cannot reach a webhook.

@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Orion\NotifyRules\Models;
+namespace OrionSoft\NotifyRules\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
-use Orion\NotifyRules\Engine\RuleRepository;
-use Orion\NotifyRules\Enums\RuleEvent;
+use OrionSoft\NotifyRules\Engine\RuleRepository;
+use OrionSoft\NotifyRules\Enums\RuleEvent;
 
 /**
  * @property int $id

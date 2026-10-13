@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 use Filament\Facades\Filament;
 use Livewire\Livewire;
-use Orion\NotifyRules\Filament\Pages\TelegramConnection;
-use Orion\NotifyRules\Telegram\TelegramLinkManager;
-use Orion\NotifyRules\Tests\Fixtures\Models\User;
+use OrionSoft\NotifyRules\Filament\Pages\TelegramConnection;
+use OrionSoft\NotifyRules\Telegram\TelegramLinkManager;
+use OrionSoft\NotifyRules\Tests\Fixtures\Models\User;
 
 beforeEach(function (): void {
     Filament::setCurrentPanel(Filament::getPanel('admin'));

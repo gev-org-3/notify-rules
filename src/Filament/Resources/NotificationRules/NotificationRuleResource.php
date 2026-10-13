@@ -2,20 +2,20 @@
 
 declare(strict_types=1);
 
-namespace Orion\NotifyRules\Filament\Resources\NotificationRules;
+namespace OrionSoft\NotifyRules\Filament\Resources\NotificationRules;
 
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
-use Orion\NotifyRules\Filament\Resources\Concerns\AuthorizesRuleManagers;
-use Orion\NotifyRules\Filament\Resources\NotificationRules\Pages\CreateNotificationRule;
-use Orion\NotifyRules\Filament\Resources\NotificationRules\Pages\EditNotificationRule;
-use Orion\NotifyRules\Filament\Resources\NotificationRules\Pages\ListNotificationRules;
-use Orion\NotifyRules\Filament\Resources\NotificationRules\Schemas\NotificationRuleForm;
-use Orion\NotifyRules\Filament\Resources\NotificationRules\Tables\NotificationRulesTable;
-use Orion\NotifyRules\Models\NotificationRule;
+use OrionSoft\NotifyRules\Filament\Resources\Concerns\AuthorizesRuleManagers;
+use OrionSoft\NotifyRules\Filament\Resources\NotificationRules\Pages\CreateNotificationRule;
+use OrionSoft\NotifyRules\Filament\Resources\NotificationRules\Pages\EditNotificationRule;
+use OrionSoft\NotifyRules\Filament\Resources\NotificationRules\Pages\ListNotificationRules;
+use OrionSoft\NotifyRules\Filament\Resources\NotificationRules\Schemas\NotificationRuleForm;
+use OrionSoft\NotifyRules\Filament\Resources\NotificationRules\Tables\NotificationRulesTable;
+use OrionSoft\NotifyRules\Models\NotificationRule;
 
 final class NotificationRuleResource extends Resource
 {

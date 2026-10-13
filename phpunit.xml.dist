@@ -16,7 +16,7 @@
     backupStaticProperties="false"
 >
     <testsuites>
-        <testsuite name="Orion Test Suite">
+        <testsuite name="Notify Rules Test Suite">
             <directory>tests</directory>
         </testsuite>
     </testsuites>

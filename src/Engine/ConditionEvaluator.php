@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Orion\NotifyRules\Engine;
+namespace OrionSoft\NotifyRules\Engine;
 
 use BackedEnum;
 use DateTimeInterface;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
-use Orion\NotifyRules\Enums\ConditionOperator;
-use Orion\NotifyRules\Models\NotificationRule;
+use OrionSoft\NotifyRules\Enums\ConditionOperator;
+use OrionSoft\NotifyRules\Models\NotificationRule;
 use Throwable;
 use UnitEnum;
 

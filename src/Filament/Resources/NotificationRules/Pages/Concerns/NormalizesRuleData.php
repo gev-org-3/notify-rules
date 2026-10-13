@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Orion\NotifyRules\Filament\Resources\NotificationRules\Pages\Concerns;
+namespace OrionSoft\NotifyRules\Filament\Resources\NotificationRules\Pages\Concerns;
 
-use Orion\NotifyRules\Enums\RuleEvent;
-use Orion\NotifyRules\Models\NotificationRule;
+use OrionSoft\NotifyRules\Enums\RuleEvent;
+use OrionSoft\NotifyRules\Models\NotificationRule;
 
 trait NormalizesRuleData
 {

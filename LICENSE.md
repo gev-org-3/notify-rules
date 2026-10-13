@@ -1,6 +1,6 @@
 # Notify Rules Commercial License
 
-Copyright (c) 2026 Gevorg Manukyan <gevorgmanukyan349@gmail.com>. All rights reserved.
+Copyright (c) 2026 Orion Soft (Gevorg Manukyan) <gevorgmanukyan349@gmail.com>. All rights reserved.
 
 Notify Rules (the "Software") is commercial software. It is licensed, not sold. By installing, copying or using the Software you agree to this license. If you do not agree, do not use the Software.
 

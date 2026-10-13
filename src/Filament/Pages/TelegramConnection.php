@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Orion\NotifyRules\Filament\Pages;
+namespace OrionSoft\NotifyRules\Filament\Pages;
 
 use Filament\Actions\Action;
 use Filament\Facades\Filament;
@@ -11,8 +11,8 @@ use Filament\Pages\Page;
 use Filament\Support\Icons\Heroicon;
 use Illuminate\Database\Eloquent\Model;
 use LogicException;
-use Orion\NotifyRules\Models\TelegramLink;
-use Orion\NotifyRules\Telegram\TelegramLinkManager;
+use OrionSoft\NotifyRules\Models\TelegramLink;
+use OrionSoft\NotifyRules\Telegram\TelegramLinkManager;
 
 final class TelegramConnection extends Page
 {

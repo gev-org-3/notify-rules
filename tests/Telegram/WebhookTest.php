@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Http;
-use Orion\NotifyRules\Telegram\TelegramLinkManager;
-use Orion\NotifyRules\Tests\Fixtures\Models\User;
+use OrionSoft\NotifyRules\Telegram\TelegramLinkManager;
+use OrionSoft\NotifyRules\Tests\Fixtures\Models\User;
 
 function telegramUpdate(string $text, string $chatType = 'private', ?string $languageCode = 'en'): array
 {

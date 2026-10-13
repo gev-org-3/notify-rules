@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 use Filament\Facades\Filament;
 use Livewire\Livewire;
-use Orion\NotifyRules\Enums\ConditionOperator;
-use Orion\NotifyRules\Enums\DeliveryStatus;
-use Orion\NotifyRules\Enums\RuleEvent;
-use Orion\NotifyRules\Filament\Pages\TelegramConnection;
-use Orion\NotifyRules\Filament\Resources\Deliveries\Pages\ListDeliveries;
-use Orion\NotifyRules\Filament\Resources\NotificationRules\Pages\CreateNotificationRule;
-use Orion\NotifyRules\Filament\Resources\NotificationRules\Pages\EditNotificationRule;
-use Orion\NotifyRules\Filament\Resources\NotificationRules\Pages\ListNotificationRules;
-use Orion\NotifyRules\Models\Delivery;
-use Orion\NotifyRules\Tests\Fixtures\Models\Order;
-use Orion\NotifyRules\Tests\Fixtures\Models\User;
+use OrionSoft\NotifyRules\Enums\ConditionOperator;
+use OrionSoft\NotifyRules\Enums\DeliveryStatus;
+use OrionSoft\NotifyRules\Enums\RuleEvent;
+use OrionSoft\NotifyRules\Filament\Pages\TelegramConnection;
+use OrionSoft\NotifyRules\Filament\Resources\Deliveries\Pages\ListDeliveries;
+use OrionSoft\NotifyRules\Filament\Resources\NotificationRules\Pages\CreateNotificationRule;
+use OrionSoft\NotifyRules\Filament\Resources\NotificationRules\Pages\EditNotificationRule;
+use OrionSoft\NotifyRules\Filament\Resources\NotificationRules\Pages\ListNotificationRules;
+use OrionSoft\NotifyRules\Models\Delivery;
+use OrionSoft\NotifyRules\Tests\Fixtures\Models\Order;
+use OrionSoft\NotifyRules\Tests\Fixtures\Models\User;
 
 function flattenKeys(array $translations, string $prefix = ''): array
 {

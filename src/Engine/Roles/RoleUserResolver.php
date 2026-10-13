@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Orion\NotifyRules\Engine\Roles;
+namespace OrionSoft\NotifyRules\Engine\Roles;
 
 /**
  * Finds the users that have any of the given roles. Bind your own implementation

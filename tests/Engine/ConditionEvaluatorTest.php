@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-use Orion\NotifyRules\Engine\ConditionEvaluator;
-use Orion\NotifyRules\Models\NotificationRule;
-use Orion\NotifyRules\Tests\Fixtures\Models\Order;
-use Orion\NotifyRules\Tests\Fixtures\Models\User;
+use OrionSoft\NotifyRules\Engine\ConditionEvaluator;
+use OrionSoft\NotifyRules\Models\NotificationRule;
+use OrionSoft\NotifyRules\Tests\Fixtures\Models\Order;
+use OrionSoft\NotifyRules\Tests\Fixtures\Models\User;
 
 function condition(string $field, string $operator, mixed $value = null): array
 {

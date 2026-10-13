@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Orion\NotifyRules\Filament\Resources\Concerns;
+namespace OrionSoft\NotifyRules\Filament\Resources\Concerns;
 
 use Illuminate\Database\Eloquent\Builder;
-use Orion\NotifyRules\NotifyRulesPlugin;
-use Orion\NotifyRules\Support\Tenancy;
+use OrionSoft\NotifyRules\NotifyRulesPlugin;
+use OrionSoft\NotifyRules\Support\Tenancy;
 
 /**
  * Access is decided by the model policies (NotificationRulePolicy and DeliveryPolicy unless the app

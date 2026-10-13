@@ -7,17 +7,17 @@ use Illuminate\Http\Client\Factory as HttpFactory;
 use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Http;
 use Livewire\Livewire;
-use Orion\NotifyRules\Enums\DeliveryStatus;
-use Orion\NotifyRules\Enums\RuleEvent;
-use Orion\NotifyRules\Filament\Resources\NotificationRules\NotificationRuleResource;
-use Orion\NotifyRules\Filament\Resources\NotificationRules\Pages\CreateNotificationRule;
-use Orion\NotifyRules\Filament\Resources\NotificationRules\Pages\EditNotificationRule;
-use Orion\NotifyRules\Filament\Resources\NotificationRules\Pages\ListNotificationRules;
-use Orion\NotifyRules\Models\Delivery;
-use Orion\NotifyRules\Models\NotificationRule;
-use Orion\NotifyRules\Telegram\TelegramLinkManager;
-use Orion\NotifyRules\Tests\Fixtures\Models\Order;
-use Orion\NotifyRules\Tests\Fixtures\Models\User;
+use OrionSoft\NotifyRules\Enums\DeliveryStatus;
+use OrionSoft\NotifyRules\Enums\RuleEvent;
+use OrionSoft\NotifyRules\Filament\Resources\NotificationRules\NotificationRuleResource;
+use OrionSoft\NotifyRules\Filament\Resources\NotificationRules\Pages\CreateNotificationRule;
+use OrionSoft\NotifyRules\Filament\Resources\NotificationRules\Pages\EditNotificationRule;
+use OrionSoft\NotifyRules\Filament\Resources\NotificationRules\Pages\ListNotificationRules;
+use OrionSoft\NotifyRules\Models\Delivery;
+use OrionSoft\NotifyRules\Models\NotificationRule;
+use OrionSoft\NotifyRules\Telegram\TelegramLinkManager;
+use OrionSoft\NotifyRules\Tests\Fixtures\Models\Order;
+use OrionSoft\NotifyRules\Tests\Fixtures\Models\User;
 
 beforeEach(function (): void {
     Filament::setCurrentPanel(Filament::getPanel('admin'));

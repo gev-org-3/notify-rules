@@ -2,25 +2,25 @@
 
 declare(strict_types=1);
 
-namespace Orion\NotifyRules;
+namespace OrionSoft\NotifyRules;
 
 use Filament\Facades\Filament;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\RateLimiter;
-use Orion\NotifyRules\Commands\PollCommand;
-use Orion\NotifyRules\Commands\PruneCommand;
-use Orion\NotifyRules\Commands\WebhookCommand;
-use Orion\NotifyRules\Engine\ModelEventRegistrar;
-use Orion\NotifyRules\Engine\Roles\RoleUserResolver;
-use Orion\NotifyRules\Engine\Roles\SpatieRoleUserResolver;
-use Orion\NotifyRules\Jobs\SendTelegramMessage;
-use Orion\NotifyRules\Models\Delivery;
-use Orion\NotifyRules\Models\NotificationRule;
-use Orion\NotifyRules\Policies\DeliveryPolicy;
-use Orion\NotifyRules\Policies\NotificationRulePolicy;
-use Orion\NotifyRules\Telegram\HttpTelegramClient;
-use Orion\NotifyRules\Telegram\TelegramClient;
+use OrionSoft\NotifyRules\Commands\PollCommand;
+use OrionSoft\NotifyRules\Commands\PruneCommand;
+use OrionSoft\NotifyRules\Commands\WebhookCommand;
+use OrionSoft\NotifyRules\Engine\ModelEventRegistrar;
+use OrionSoft\NotifyRules\Engine\Roles\RoleUserResolver;
+use OrionSoft\NotifyRules\Engine\Roles\SpatieRoleUserResolver;
+use OrionSoft\NotifyRules\Jobs\SendTelegramMessage;
+use OrionSoft\NotifyRules\Models\Delivery;
+use OrionSoft\NotifyRules\Models\NotificationRule;
+use OrionSoft\NotifyRules\Policies\DeliveryPolicy;
+use OrionSoft\NotifyRules\Policies\NotificationRulePolicy;
+use OrionSoft\NotifyRules\Telegram\HttpTelegramClient;
+use OrionSoft\NotifyRules\Telegram\TelegramClient;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;

@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Orion\NotifyRules\Filament\Resources\Deliveries\Schemas;
+namespace OrionSoft\NotifyRules\Filament\Resources\Deliveries\Schemas;
 
 use Filament\Infolists\Components\TextEntry;
 use Filament\Schemas\Schema;
 use Illuminate\Support\HtmlString;
-use Orion\NotifyRules\Engine\TemplateRenderer;
-use Orion\NotifyRules\Filament\Resources\Deliveries\Tables\DeliveriesTable;
-use Orion\NotifyRules\Models\Delivery;
+use OrionSoft\NotifyRules\Engine\TemplateRenderer;
+use OrionSoft\NotifyRules\Filament\Resources\Deliveries\Tables\DeliveriesTable;
+use OrionSoft\NotifyRules\Models\Delivery;
 
 final class DeliveryInfolist
 {

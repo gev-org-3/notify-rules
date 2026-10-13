@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Orion\NotifyRules\Tests;
+namespace OrionSoft\NotifyRules\Tests;
 
 use BladeUI\Heroicons\BladeHeroiconsServiceProvider;
 use BladeUI\Icons\BladeIconsServiceProvider;
@@ -18,10 +18,10 @@ use Filament\Widgets\WidgetsServiceProvider;
 use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
 use Livewire\LivewireServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
-use Orion\NotifyRules\NotifyRulesServiceProvider;
-use Orion\NotifyRules\Tests\Fixtures\Models\User;
-use Orion\NotifyRules\Tests\Fixtures\Providers\AdminPanelProvider;
-use Orion\NotifyRules\Tests\Fixtures\Providers\TeamPanelProvider;
+use OrionSoft\NotifyRules\NotifyRulesServiceProvider;
+use OrionSoft\NotifyRules\Tests\Fixtures\Models\User;
+use OrionSoft\NotifyRules\Tests\Fixtures\Providers\AdminPanelProvider;
+use OrionSoft\NotifyRules\Tests\Fixtures\Providers\TeamPanelProvider;
 use RyanChandler\BladeCaptureDirective\BladeCaptureDirectiveServiceProvider;
 
 abstract class TestCase extends Orchestra

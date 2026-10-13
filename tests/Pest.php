@@ -1,8 +1,8 @@
 <?php
 
-use Orion\NotifyRules\Models\NotificationRule;
-use Orion\NotifyRules\Tests\Fixtures\Models\Order;
-use Orion\NotifyRules\Tests\TestCase;
+use OrionSoft\NotifyRules\Models\NotificationRule;
+use OrionSoft\NotifyRules\Tests\Fixtures\Models\Order;
+use OrionSoft\NotifyRules\Tests\TestCase;
 
 uses(TestCase::class)->in(__DIR__);
 

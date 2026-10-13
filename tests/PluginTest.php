@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 use Filament\Facades\Filament;
 use Illuminate\Support\Facades\Schema;
-use Orion\NotifyRules\NotifyRulesPlugin;
-use Orion\NotifyRules\Tests\Fixtures\Models\Order;
-use Orion\NotifyRules\Tests\Fixtures\Models\User;
+use OrionSoft\NotifyRules\NotifyRulesPlugin;
+use OrionSoft\NotifyRules\Tests\Fixtures\Models\Order;
+use OrionSoft\NotifyRules\Tests\Fixtures\Models\User;
 
 it('is registered in the panel', function (): void {
     Filament::setCurrentPanel(Filament::getPanel('admin'));

@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Orion\NotifyRules\Policies\Concerns;
+namespace OrionSoft\NotifyRules\Policies\Concerns;
 
 use Filament\Facades\Filament;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
-use Orion\NotifyRules\NotifyRulesPlugin;
-use Orion\NotifyRules\Support\Tenancy;
+use OrionSoft\NotifyRules\NotifyRulesPlugin;
+use OrionSoft\NotifyRules\Support\Tenancy;
 
 trait ChecksRuleManagers
 {

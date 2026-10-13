@@ -5,9 +5,9 @@ declare(strict_types=1);
 use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Http;
-use Orion\NotifyRules\Telegram\HttpTelegramClient;
-use Orion\NotifyRules\Telegram\TelegramClient;
-use Orion\NotifyRules\Telegram\TelegramException;
+use OrionSoft\NotifyRules\Telegram\HttpTelegramClient;
+use OrionSoft\NotifyRules\Telegram\TelegramClient;
+use OrionSoft\NotifyRules\Telegram\TelegramException;
 
 it('is bound in the container', function (): void {
     expect(app(TelegramClient::class))->toBeInstanceOf(HttpTelegramClient::class);

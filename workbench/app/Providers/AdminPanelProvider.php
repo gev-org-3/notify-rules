@@ -24,7 +24,7 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Support\Facades\Route;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
-use Orion\NotifyRules\NotifyRulesPlugin;
+use OrionSoft\NotifyRules\NotifyRulesPlugin;
 use Workbench\App\Filament\Resources\Orders\OrderResource;
 use Workbench\App\Http\Middleware\SetLocale;
 use Workbench\App\Models\Order;

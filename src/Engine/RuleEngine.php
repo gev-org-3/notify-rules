@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Orion\NotifyRules\Engine;
+namespace OrionSoft\NotifyRules\Engine;
 
 use Illuminate\Database\Eloquent\Model;
-use Orion\NotifyRules\Enums\RuleEvent;
-use Orion\NotifyRules\Jobs\SendTelegramMessage;
-use Orion\NotifyRules\Models\Delivery;
-use Orion\NotifyRules\Models\NotificationRule;
-use Orion\NotifyRules\Support\Tenancy;
+use OrionSoft\NotifyRules\Enums\RuleEvent;
+use OrionSoft\NotifyRules\Jobs\SendTelegramMessage;
+use OrionSoft\NotifyRules\Models\Delivery;
+use OrionSoft\NotifyRules\Models\NotificationRule;
+use OrionSoft\NotifyRules\Support\Tenancy;
 use Throwable;
 
 /**

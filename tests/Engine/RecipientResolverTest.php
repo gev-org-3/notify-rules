@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-use Orion\NotifyRules\Engine\RecipientResolver;
-use Orion\NotifyRules\Engine\Roles\RoleUserResolver;
-use Orion\NotifyRules\Models\NotificationRule;
-use Orion\NotifyRules\Models\TelegramLink;
-use Orion\NotifyRules\Telegram\TelegramLinkManager;
-use Orion\NotifyRules\Tests\Fixtures\Models\User;
+use OrionSoft\NotifyRules\Engine\RecipientResolver;
+use OrionSoft\NotifyRules\Engine\Roles\RoleUserResolver;
+use OrionSoft\NotifyRules\Models\NotificationRule;
+use OrionSoft\NotifyRules\Models\TelegramLink;
+use OrionSoft\NotifyRules\Telegram\TelegramLinkManager;
+use OrionSoft\NotifyRules\Tests\Fixtures\Models\User;
 
 function linkTelegram(User $user, string $chatId): TelegramLink
 {

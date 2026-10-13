@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Orion\NotifyRules\Filament\Resources\NotificationRules\Schemas;
+namespace OrionSoft\NotifyRules\Filament\Resources\NotificationRules\Schemas;
 
 use Closure;
 use Filament\Forms\Components\Repeater;
@@ -18,13 +18,13 @@ use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Schema;
 use Illuminate\Support\HtmlString;
-use Orion\NotifyRules\Engine\RecipientResolver;
-use Orion\NotifyRules\Engine\RuleTester;
-use Orion\NotifyRules\Engine\TemplateRenderer;
-use Orion\NotifyRules\Enums\ConditionOperator;
-use Orion\NotifyRules\Enums\RuleEvent;
-use Orion\NotifyRules\Filament\Resources\NotificationRules\RuleFormOptions;
-use Orion\NotifyRules\Models\NotificationRule;
+use OrionSoft\NotifyRules\Engine\RecipientResolver;
+use OrionSoft\NotifyRules\Engine\RuleTester;
+use OrionSoft\NotifyRules\Engine\TemplateRenderer;
+use OrionSoft\NotifyRules\Enums\ConditionOperator;
+use OrionSoft\NotifyRules\Enums\RuleEvent;
+use OrionSoft\NotifyRules\Filament\Resources\NotificationRules\RuleFormOptions;
+use OrionSoft\NotifyRules\Models\NotificationRule;
 
 final class NotificationRuleForm
 {

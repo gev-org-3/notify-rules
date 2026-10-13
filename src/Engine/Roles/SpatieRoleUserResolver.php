@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Orion\NotifyRules\Engine\Roles;
+namespace OrionSoft\NotifyRules\Engine\Roles;
 
 use Illuminate\Database\Eloquent\Model;
 

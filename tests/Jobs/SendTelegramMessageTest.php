@@ -5,12 +5,12 @@ declare(strict_types=1);
 use Illuminate\Queue\Middleware\RateLimited;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\RateLimiter;
-use Orion\NotifyRules\Enums\DeliveryStatus;
-use Orion\NotifyRules\Jobs\SendTelegramMessage;
-use Orion\NotifyRules\Models\Delivery;
-use Orion\NotifyRules\Models\TelegramLink;
-use Orion\NotifyRules\Telegram\TelegramClient;
-use Orion\NotifyRules\Tests\Fixtures\Models\User;
+use OrionSoft\NotifyRules\Enums\DeliveryStatus;
+use OrionSoft\NotifyRules\Jobs\SendTelegramMessage;
+use OrionSoft\NotifyRules\Models\Delivery;
+use OrionSoft\NotifyRules\Models\TelegramLink;
+use OrionSoft\NotifyRules\Telegram\TelegramClient;
+use OrionSoft\NotifyRules\Tests\Fixtures\Models\User;
 
 function makeDelivery(string $chatId = '100'): Delivery
 {

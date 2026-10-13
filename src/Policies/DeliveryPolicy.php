@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Orion\NotifyRules\Policies;
+namespace OrionSoft\NotifyRules\Policies;
 
 use Illuminate\Contracts\Auth\Authenticatable;
-use Orion\NotifyRules\Models\Delivery;
-use Orion\NotifyRules\Policies\Concerns\ChecksRuleManagers;
+use OrionSoft\NotifyRules\Models\Delivery;
+use OrionSoft\NotifyRules\Policies\Concerns\ChecksRuleManagers;
 
 /**
  * The delivery log is read-only: deliveries are only created by rules and can only be resent.

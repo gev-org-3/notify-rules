@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Orion\NotifyRules\Engine;
+namespace OrionSoft\NotifyRules\Engine;
 
 use BackedEnum;
 use DateTimeInterface;
@@ -13,7 +13,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\HtmlString;
 use JsonSerializable;
 use NumberFormatter;
-use Orion\NotifyRules\Models\NotificationRule;
+use OrionSoft\NotifyRules\Models\NotificationRule;
 use Stringable;
 use Throwable;
 use UnitEnum;

@@ -27,7 +27,7 @@ No custom theme is needed: the plugin is built from Filament's own components.
 ## Installation
 
 ```bash
-composer require orion/notify-rules
+composer require orion-soft/notify-rules
 php artisan notify-rules:install
 ```
 
@@ -46,7 +46,7 @@ If your panel uses multi-tenancy, set `notify-rules.tenancy.column` **before** r
 ```php
 use App\Models\Lead;
 use App\Models\Order;
-use Orion\NotifyRules\NotifyRulesPlugin;
+use OrionSoft\NotifyRules\NotifyRulesPlugin;
 
 public function panel(Panel $panel): Panel
 {
@@ -179,7 +179,7 @@ Formatting: `<b>`, `<i>`, `<code>` and `<a href="https://...">`. Everything else
 ### Recipients
 
 - **Users** receive messages once they have connected Telegram.
-- **Roles** use [spatie/laravel-permission](https://github.com/spatie/laravel-permission) when it is installed; it is not required. To use your own roles, bind an implementation of `Orion\NotifyRules\Engine\Roles\RoleUserResolver` in the container.
+- **Roles** use [spatie/laravel-permission](https://github.com/spatie/laravel-permission) when it is installed; it is not required. To use your own roles, bind an implementation of `OrionSoft\NotifyRules\Engine\Roles\RoleUserResolver` in the container.
 - **Groups and channels:** add the bot to the group, send `/chatid` there and paste the ID (for example `-1001234567890`) into the rule. A channel can also be given by its `@username`.
 
 ## Delivery log
@@ -228,7 +228,7 @@ A record runs the rules of its own tenant and the global rules created in panels
 
 ```php
 use Illuminate\Support\Facades\Gate;
-use Orion\NotifyRules\Models\NotificationRule;
+use OrionSoft\NotifyRules\Models\NotificationRule;
 
 Gate::policy(NotificationRule::class, App\Policies\NotificationRulePolicy::class);
 ```
@@ -274,7 +274,7 @@ If you discover a security issue, please email gevorgmanukyan349@gmail.com inste
 
 ## Credits
 
-- [Gevorg Manukyan](https://github.com/gev-org-3)
+- [Orion Soft](https://github.com/gev-org-3) (Gevorg Manukyan)
 
 ## License
 

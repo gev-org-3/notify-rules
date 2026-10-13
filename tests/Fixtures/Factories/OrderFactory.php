@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Orion\NotifyRules\Tests\Fixtures\Factories;
+namespace OrionSoft\NotifyRules\Tests\Fixtures\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Orion\NotifyRules\Tests\Fixtures\Models\Order;
+use OrionSoft\NotifyRules\Tests\Fixtures\Models\Order;
 
 /**
  * @extends Factory<Order>

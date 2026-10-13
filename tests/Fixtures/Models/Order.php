@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Orion\NotifyRules\Tests\Fixtures\Models;
+namespace OrionSoft\NotifyRules\Tests\Fixtures\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Orion\NotifyRules\Tests\Fixtures\Factories\OrderFactory;
+use OrionSoft\NotifyRules\Tests\Fixtures\Factories\OrderFactory;
 
 final class Order extends Model
 {

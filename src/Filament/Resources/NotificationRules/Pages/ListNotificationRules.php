@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Orion\NotifyRules\Filament\Resources\NotificationRules\Pages;
+namespace OrionSoft\NotifyRules\Filament\Resources\NotificationRules\Pages;
 
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
-use Orion\NotifyRules\Filament\Resources\NotificationRules\NotificationRuleResource;
+use OrionSoft\NotifyRules\Filament\Resources\NotificationRules\NotificationRuleResource;
 
 final class ListNotificationRules extends ListRecords
 {

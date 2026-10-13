@@ -3,10 +3,10 @@
 declare(strict_types=1);
 
 use Illuminate\Support\Carbon;
-use Orion\NotifyRules\Engine\TemplateRenderer;
-use Orion\NotifyRules\Models\NotificationRule;
-use Orion\NotifyRules\Tests\Fixtures\Models\Order;
-use Orion\NotifyRules\Tests\Fixtures\Models\User;
+use OrionSoft\NotifyRules\Engine\TemplateRenderer;
+use OrionSoft\NotifyRules\Models\NotificationRule;
+use OrionSoft\NotifyRules\Tests\Fixtures\Models\Order;
+use OrionSoft\NotifyRules\Tests\Fixtures\Models\User;
 
 function renderTemplate(string $template, ?Order $order = null, string $ruleName = 'Big orders'): string
 {

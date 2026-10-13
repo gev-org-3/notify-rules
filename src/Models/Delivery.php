@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Orion\NotifyRules\Models;
+namespace OrionSoft\NotifyRules\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Support\Carbon;
-use Orion\NotifyRules\Enums\DeliveryStatus;
-use Orion\NotifyRules\Jobs\SendTelegramMessage;
+use OrionSoft\NotifyRules\Enums\DeliveryStatus;
+use OrionSoft\NotifyRules\Jobs\SendTelegramMessage;
 
 /**
  * @property int $id

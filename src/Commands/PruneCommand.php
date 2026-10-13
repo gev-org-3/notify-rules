@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Orion\NotifyRules\Commands;
+namespace OrionSoft\NotifyRules\Commands;
 
 use Illuminate\Console\Command;
-use Orion\NotifyRules\Enums\DeliveryStatus;
-use Orion\NotifyRules\Models\Delivery;
+use OrionSoft\NotifyRules\Enums\DeliveryStatus;
+use OrionSoft\NotifyRules\Models\Delivery;
 
 /**
  * Deletes old delivery log entries. Schedule it, e.g. Schedule::command('notify-rules:prune')->daily().

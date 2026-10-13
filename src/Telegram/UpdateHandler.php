@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Orion\NotifyRules\Telegram;
+namespace OrionSoft\NotifyRules\Telegram;
 
 /**
  * Handles incoming bot updates, whether they arrive through the webhook or long polling.

@@ -1,8 +1,8 @@
 {
-    "name": "orion/notify-rules",
+    "name": "orion-soft/notify-rules",
     "description": "Rule-based Telegram notifications for Filament, configured from the admin panel.",
     "keywords": [
-        "orion",
+        "orion-soft",
         "laravel",
         "filamentphp",
         "filament",
@@ -39,12 +39,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Orion\\NotifyRules\\": "src/"
+            "OrionSoft\\NotifyRules\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Orion\\NotifyRules\\Tests\\": "tests/",
+            "OrionSoft\\NotifyRules\\Tests\\": "tests/",
             "Workbench\\App\\": "workbench/app/",
             "Workbench\\Database\\Factories\\": "workbench/database/factories/",
             "Workbench\\Database\\Seeders\\": "workbench/database/seeders/"
@@ -82,7 +82,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Orion\\NotifyRules\\NotifyRulesServiceProvider"
+                "OrionSoft\\NotifyRules\\NotifyRulesServiceProvider"
             ]
         }
     },

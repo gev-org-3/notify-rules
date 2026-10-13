@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-use Orion\NotifyRules\Models\TelegramLink;
-use Orion\NotifyRules\Telegram\TelegramLinkManager;
-use Orion\NotifyRules\Tests\Fixtures\Models\User;
+use OrionSoft\NotifyRules\Models\TelegramLink;
+use OrionSoft\NotifyRules\Telegram\TelegramLinkManager;
+use OrionSoft\NotifyRules\Tests\Fixtures\Models\User;
 
 beforeEach(function (): void {
     $this->links = app(TelegramLinkManager::class);

@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Orion\NotifyRules\Filament\Resources\NotificationRules\Pages;
+namespace OrionSoft\NotifyRules\Filament\Resources\NotificationRules\Pages;
 
 use Filament\Actions\DeleteAction;
 use Filament\Resources\Pages\EditRecord;
-use Orion\NotifyRules\Filament\Resources\NotificationRules\Actions\SendTestMessageAction;
-use Orion\NotifyRules\Filament\Resources\NotificationRules\NotificationRuleResource;
-use Orion\NotifyRules\Filament\Resources\NotificationRules\Pages\Concerns\NormalizesRuleData;
+use OrionSoft\NotifyRules\Filament\Resources\NotificationRules\Actions\SendTestMessageAction;
+use OrionSoft\NotifyRules\Filament\Resources\NotificationRules\NotificationRuleResource;
+use OrionSoft\NotifyRules\Filament\Resources\NotificationRules\Pages\Concerns\NormalizesRuleData;
 
 final class EditNotificationRule extends EditRecord
 {

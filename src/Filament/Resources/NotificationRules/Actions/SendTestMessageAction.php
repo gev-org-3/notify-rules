@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Orion\NotifyRules\Filament\Resources\NotificationRules\Actions;
+namespace OrionSoft\NotifyRules\Filament\Resources\NotificationRules\Actions;
 
 use Filament\Actions\Action;
 use Filament\Facades\Filament;
@@ -11,11 +11,11 @@ use Filament\Resources\Pages\CreateRecord;
 use Filament\Resources\Pages\EditRecord;
 use Filament\Support\Icons\Heroicon;
 use Illuminate\Database\Eloquent\Model;
-use Orion\NotifyRules\Engine\RuleTester;
-use Orion\NotifyRules\Enums\DeliveryStatus;
-use Orion\NotifyRules\Filament\Pages\TelegramConnection;
-use Orion\NotifyRules\Filament\Resources\NotificationRules\Schemas\NotificationRuleForm;
-use Orion\NotifyRules\Models\NotificationRule;
+use OrionSoft\NotifyRules\Engine\RuleTester;
+use OrionSoft\NotifyRules\Enums\DeliveryStatus;
+use OrionSoft\NotifyRules\Filament\Pages\TelegramConnection;
+use OrionSoft\NotifyRules\Filament\Resources\NotificationRules\Schemas\NotificationRuleForm;
+use OrionSoft\NotifyRules\Models\NotificationRule;
 
 /**
  * Renders the form's template on the latest record and sends it to the current user's Telegram,

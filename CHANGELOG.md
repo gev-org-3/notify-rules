@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to `orion/notify-rules` are documented in this file.
+All notable changes to `orion-soft/notify-rules` are documented in this file.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the project uses [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]

@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Orion\NotifyRules\Filament\Resources\Deliveries;
+namespace OrionSoft\NotifyRules\Filament\Resources\Deliveries;
 
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
-use Orion\NotifyRules\Filament\Resources\Concerns\AuthorizesRuleManagers;
-use Orion\NotifyRules\Filament\Resources\Deliveries\Pages\ListDeliveries;
-use Orion\NotifyRules\Filament\Resources\Deliveries\Schemas\DeliveryInfolist;
-use Orion\NotifyRules\Filament\Resources\Deliveries\Tables\DeliveriesTable;
-use Orion\NotifyRules\Models\Delivery;
+use OrionSoft\NotifyRules\Filament\Resources\Concerns\AuthorizesRuleManagers;
+use OrionSoft\NotifyRules\Filament\Resources\Deliveries\Pages\ListDeliveries;
+use OrionSoft\NotifyRules\Filament\Resources\Deliveries\Schemas\DeliveryInfolist;
+use OrionSoft\NotifyRules\Filament\Resources\Deliveries\Tables\DeliveriesTable;
+use OrionSoft\NotifyRules\Models\Delivery;
 
 /**
  * Read-only log of sent messages. Failed deliveries can be resent.

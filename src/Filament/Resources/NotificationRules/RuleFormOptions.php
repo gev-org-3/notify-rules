@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Orion\NotifyRules\Filament\Resources\NotificationRules;
+namespace OrionSoft\NotifyRules\Filament\Resources\NotificationRules;
 
 use Filament\Facades\Filament;
 use Filament\Models\Contracts\HasTenants;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
-use Orion\NotifyRules\Engine\ModelFields;
-use Orion\NotifyRules\Models\TelegramLink;
-use Orion\NotifyRules\NotifyRulesPlugin;
+use OrionSoft\NotifyRules\Engine\ModelFields;
+use OrionSoft\NotifyRules\Models\TelegramLink;
+use OrionSoft\NotifyRules\NotifyRulesPlugin;
 
 /**
  * Options for the rule form, all limited to the models allowed in the current panel.

@@ -26,7 +26,8 @@ jobs:
           - laravel: 12.*
             testbench: 10.*
           - laravel: 11.*
-            testbench: 9.*
+            # 9.16 is the first version that understands "laravel: '@testbench'" in testbench.yaml.
+            testbench: '^9.16'
         exclude:
           - laravel: 13.*
             php: 8.2

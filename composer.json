@@ -57,7 +57,11 @@
         ],
         "clear": "@php vendor/bin/testbench package:purge-skeleton --ansi",
         "prepare": "@php vendor/bin/testbench package:discover --ansi",
-        "build": "@php vendor/bin/testbench workbench:build --ansi",
+        "env": "@php -r \"copy(is_file('workbench/.env') ? 'workbench/.env' : 'workbench/.env.example', 'vendor/orchestra/testbench-core/laravel/.env');\"",
+        "build": [
+            "@env",
+            "@php vendor/bin/testbench workbench:build --ansi"
+        ],
         "serve": [
             "Composer\\Config::disableProcessTimeout",
             "@build",
@@ -65,6 +69,7 @@
         ],
         "poll": [
             "Composer\\Config::disableProcessTimeout",
+            "@env",
             "@php vendor/bin/testbench notify-rules:poll --ansi"
         ],
         "analyse": "phpstan analyse",

@@ -99,6 +99,38 @@ it('escapes values inside links', function (): void {
         ->toBe('<a href="https://shop.test/&quot; onclick=&quot;alert(1)">open</a>');
 });
 
+it('keeps only http, https and tg links', function (string $href, bool $kept): void {
+    $result = renderTemplate("<a href=\"{$href}\">open</a>");
+
+    expect($result)->toBe($kept ? "<a href=\"{$href}\">open</a>" : 'open');
+})->with([
+    'https' => ['https://shop.test', true],
+    'http' => ['http://shop.test', true],
+    'tg' => ['tg://resolve?domain=x', true],
+    'javascript' => ['javascript:alert(1)', false],
+    'data' => ['data:text/html,x', false],
+    'relative' => ['/orders/1', false],
+    'empty' => ['', false],
+]);
+
+it('unwraps links whose URL comes from an unsafe value', function (): void {
+    $order = Order::factory()->create(['number' => 'javascript:alert(1)']);
+
+    expect(renderTemplate('<a href="{{ number }}">open</a> <b>x</b>', $order))->toBe('open <b>x</b>');
+});
+
+it('makes stored messages safe to show in the panel', function (string $stored, string $shown): void {
+    expect(app(TemplateRenderer::class)->toPanelHtml($stored)->toHtml())->toBe($shown);
+})->with([
+    'allowed tags and line breaks' => ["<b>A</b>\n<i>b</i> <code>c</code>", "<b>A</b><br>\n<i>b</i> <code>c</code>"],
+    'safe link' => ['<a href="https://shop.test/1">open</a>', '<a href="https://shop.test/1">open</a>'],
+    'script' => ['<script>alert(1)</script>', '&lt;script&gt;alert(1)&lt;/script&gt;'],
+    'attributes' => ['<b onclick="x">A</b>', '&lt;b onclick=&quot;x&quot;&gt;A</b>'],
+    'unsafe link' => ['<a href="javascript:x">A</a>', '&lt;a href=&quot;javascript:x&quot;&gt;A</a>'],
+    'unclosed tag' => ['<img src=x onerror=alert(1)', '&lt;img src=x onerror=alert(1)'],
+    'entities stay' => ['1 &lt; 2 &amp; 3', '1 &lt; 2 &amp; 3'],
+]);
+
 it('normalizes tag case', function (): void {
     expect(renderTemplate('<B>x</B>'))->toBe('<b>x</b>');
 });

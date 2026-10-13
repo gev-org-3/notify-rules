@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Support\Carbon;
 use Orion\NotifyRules\Enums\DeliveryStatus;
+use Orion\NotifyRules\Jobs\SendTelegramMessage;
 
 /**
  * @property int $id
@@ -66,6 +67,41 @@ final class Delivery extends Model
     public function subject(): MorphTo
     {
         return $this->morphTo();
+    }
+
+    /**
+     * The link of the user this delivery went to, if it was not a group or channel.
+     *
+     * @return BelongsTo<TelegramLink, $this>
+     */
+    public function telegramLink(): BelongsTo
+    {
+        return $this->belongsTo(TelegramLink::class, 'chat_id', 'chat_id');
+    }
+
+    public function canBeResent(): bool
+    {
+        return $this->status === DeliveryStatus::Failed;
+    }
+
+    /**
+     * Sends a failed delivery again, from scratch.
+     */
+    public function resend(): void
+    {
+        if (! $this->canBeResent()) {
+            return;
+        }
+
+        $this->forceFill([
+            'status' => DeliveryStatus::Pending,
+            'attempts' => 0,
+            'error' => null,
+            'telegram_message_id' => null,
+            'sent_at' => null,
+        ])->save();
+
+        dispatch(new SendTelegramMessage($this));
     }
 
     public function markAsSent(string $telegramMessageId): void

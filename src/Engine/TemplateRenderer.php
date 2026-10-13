@@ -10,6 +10,7 @@ use Filament\Facades\Filament;
 use Filament\Support\Contracts\HasLabel;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\HtmlString;
 use JsonSerializable;
 use Orion\NotifyRules\Models\NotificationRule;
 use Stringable;
@@ -57,7 +58,7 @@ final class TemplateRenderer
             $this->sanitize($marked),
         );
 
-        return $this->truncate(trim($html));
+        return $this->truncate(trim($this->unwrapUnsafeLinks($html)));
     }
 
     /**
@@ -84,6 +85,23 @@ final class TemplateRenderer
         $html = (string) preg_replace_callback('/<(\/?)(B|I|CODE)>/', static fn (array $m): string => '<' . $m[1] . strtolower($m[2]) . '>', $html);
 
         return $this->isBalanced($html) ? $html : $escaped;
+    }
+
+    /**
+     * Makes stored Telegram HTML safe to show in the panel: only exact <b>, <i>, <code> and http(s)/tg
+     * links are kept, any other tag is escaped. Line breaks become <br>.
+     */
+    public function toPanelHtml(string $telegramHtml): HtmlString
+    {
+        $html = (string) preg_replace_callback(
+            '/<[^>]*>?/',
+            static fn (array $tag): string => preg_match('/^(<\/?(b|i|code)>|<a href="(https?|tg):\/\/[^"<>]*">|<\/a>)$/', $tag[0]) === 1
+                ? $tag[0]
+                : htmlspecialchars($tag[0], ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8'),
+            $telegramHtml,
+        );
+
+        return new HtmlString(nl2br($html, false));
     }
 
     public function truncate(string $html, int $limit = self::MAX_LENGTH): string
@@ -214,6 +232,16 @@ final class TemplateRenderer
         }
 
         return '';
+    }
+
+    /**
+     * Keeps the text of links whose URL is not http(s):// or tg:// (javascript:, data:, empty...).
+     * The rendered HTML is also shown in the panel as a preview. Links are never nested, so the next
+     * closing tag belongs to the link.
+     */
+    private function unwrapUnsafeLinks(string $html): string
+    {
+        return (string) preg_replace('/<a href="(?!(?:https?|tg):\/\/)[^"]*">(.*?)<\/a>/is', '$1', $html);
     }
 
     private function isBalanced(string $html): bool

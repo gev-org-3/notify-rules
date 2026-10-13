@@ -49,6 +49,115 @@ return [
         'chat_id' => 'Chat ID: <code>:id</code>',
     ],
 
+    'rules' => [
+        'model_label' => 'notification rule',
+        'plural_model_label' => 'notification rules',
+
+        'form' => [
+            'general' => [
+                'heading' => 'Rule',
+                'name' => 'Name',
+                'is_active' => 'Active',
+            ],
+            'trigger' => [
+                'heading' => 'When',
+                'description' => 'The record type and the event that trigger the rule.',
+                'model' => 'Record type',
+                'event' => 'Event',
+                'watched_field' => 'Field',
+            ],
+            'conditions' => [
+                'heading' => 'Conditions',
+                'description' => 'Without conditions, the rule fires on every event. "Changed" conditions only match on updates.',
+                'match' => 'Match',
+                'match_all' => 'All conditions',
+                'match_any' => 'Any condition',
+                'add' => 'Add condition',
+                'field' => 'Field',
+                'operator' => 'Operator',
+                'value' => 'Value',
+                'in_help' => 'Separate values with commas.',
+            ],
+            'recipients' => [
+                'heading' => 'Recipients',
+                'description' => 'Users receive messages once they have connected Telegram. Groups and channels are added by chat ID.',
+                'users' => 'Users',
+                'roles' => 'Roles',
+                'roles_help' => 'Users with any of these roles (spatie/laravel-permission).',
+                'chat_ids' => 'Chat IDs',
+                'chat_ids_help' => 'Group or channel IDs, e.g. -1001234567890 or @channel. Add the bot to the group first; send /chatid there to get the ID.',
+                'chat_id_invalid' => '":value" is not a Telegram chat ID.',
+                'telegram_connected' => 'Telegram connected',
+                'telegram_not_connected' => 'no Telegram',
+            ],
+            'template' => [
+                'heading' => 'Message',
+                'template' => 'Template',
+                'help' => 'Use the variables below. Allowed formatting: <b>, <i>, <code>, <a href="https://…">.',
+                'variables' => 'Variables',
+                'choose_model' => 'Choose a record type to see its variables.',
+                'preview' => 'Preview',
+                'preview_empty' => 'Choose a record type and write a template to see the preview.',
+                'no_records' => 'There are no records yet, so the variables are empty in the preview.',
+            ],
+        ],
+
+        'table' => [
+            'name' => 'Name',
+            'model' => 'Record type',
+            'event' => 'Event',
+            'is_active' => 'Active',
+            'sent_last_7_days' => 'Sent, 7 days',
+            'updated_at' => 'Updated',
+        ],
+
+        'test_message' => [
+            'label' => 'Send test',
+            'incomplete' => 'Choose a record type and write a template first.',
+            'empty' => 'The message is empty on the latest record.',
+            'not_connected' => 'Connect your Telegram to receive test messages.',
+            'sent' => 'Test message sent to your Telegram.',
+            'failed' => 'The test message could not be sent.',
+        ],
+    ],
+
+    'deliveries' => [
+        'model_label' => 'delivery',
+        'plural_model_label' => 'delivery log',
+
+        'statuses' => [
+            'pending' => 'Pending',
+            'sent' => 'Sent',
+            'failed' => 'Failed',
+        ],
+
+        'fields' => [
+            'created_at' => 'Time',
+            'rule' => 'Rule',
+            'no_rule' => 'Test message',
+            'recipient' => 'Recipient',
+            'status' => 'Status',
+            'attempts' => 'Attempts',
+            'error' => 'Error',
+            'sent_at' => 'Sent at',
+            'message' => 'Message',
+        ],
+
+        'filters' => [
+            'from' => 'From',
+            'until' => 'Until',
+        ],
+
+        'actions' => [
+            'resend' => 'Resend',
+            'resend_failed' => 'Resend failed',
+        ],
+
+        'notifications' => [
+            'resent' => '{0} No failed deliveries selected.|{1} Delivery queued again.|[2,*] :count deliveries queued again.',
+        ],
+    ],
+
     'events' => [
         'created' => 'Created',
         'updated' => 'Updated',

@@ -10,6 +10,8 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Support\Facades\Schema;
+use ReflectionClass;
 use ReflectionMethod;
 use ReflectionNamedType;
 
@@ -81,6 +83,40 @@ final class ModelFields
         }
 
         return $this->value($model, $field);
+    }
+
+    /**
+     * Columns of the model's table that rules may use.
+     *
+     * @return array<int, string>
+     */
+    public function columns(Model $model): array
+    {
+        $columns = Schema::connection($model->getConnectionName())->getColumnListing($model->getTable());
+
+        return array_values(array_filter($columns, fn (string $column): bool => $this->isReadable($model, $column)));
+    }
+
+    /**
+     * Single-record relations that templates can follow ("customer" in {{ customer.name }}).
+     *
+     * @return array<int, string>
+     */
+    public function singleRelations(Model $model): array
+    {
+        $relations = [];
+
+        foreach ((new ReflectionClass($model))->getMethods(ReflectionMethod::IS_PUBLIC) as $method) {
+            $name = $method->getName();
+
+            if ($this->isReadable($model, $name) && $this->isSingleRelation($model, $name)) {
+                $relations[] = $name;
+            }
+        }
+
+        sort($relations);
+
+        return $relations;
     }
 
     private function related(Model $model, string $relation): ?Model

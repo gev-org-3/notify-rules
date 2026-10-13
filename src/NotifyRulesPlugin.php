@@ -11,12 +11,15 @@ use Filament\Panel;
 use Filament\Support\Icons\Heroicon;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 use InvalidArgumentException;
 use Orion\NotifyRules\Filament\Pages\TelegramConnection;
+use Orion\NotifyRules\Filament\Resources\Deliveries\DeliveryResource;
+use Orion\NotifyRules\Filament\Resources\NotificationRules\NotificationRuleResource;
 
 final class NotifyRulesPlugin implements Plugin
 {
-    /** @var array<int, class-string<Model>> */
+    /** @var array<class-string<Model>, string|null> Model class => custom label */
     private array $models = [];
 
     private ?string $navigationGroup = null;
@@ -39,6 +42,11 @@ final class NotifyRulesPlugin implements Plugin
         $panel->pages([
             TelegramConnection::class,
         ]);
+
+        $panel->resources(array_values(array_filter([
+            NotificationRuleResource::class,
+            $this->hasDeliveryLog() ? DeliveryResource::class : null,
+        ])));
 
         if ($this->hasConnectTelegramInUserMenu()) {
             $panel->userMenuItems([
@@ -69,11 +77,17 @@ final class NotifyRulesPlugin implements Plugin
     }
 
     /**
-     * @param  array<int, class-string<Model>>  $models
+     * Models rules can be created for, optionally with a label: [Order::class, Lead::class => 'Leads'].
+     *
+     * @param  array<int|class-string<Model>, class-string<Model>|string>  $models
      */
     public function models(array $models): static
     {
-        foreach ($models as $model) {
+        $this->models = [];
+
+        foreach ($models as $key => $value) {
+            [$model, $label] = is_int($key) ? [$value, null] : [$key, $value];
+
             if (! is_subclass_of($model, Model::class)) {
                 throw new InvalidArgumentException("[{$model}] is not an Eloquent model.");
             }
@@ -82,9 +96,9 @@ final class NotifyRulesPlugin implements Plugin
             if (str_starts_with($model, 'Orion\\NotifyRules\\Models\\')) {
                 throw new InvalidArgumentException("[{$model}] belongs to Notify Rules and cannot have rules.");
             }
-        }
 
-        $this->models = array_values(array_unique($models));
+            $this->models[$model] = $label;
+        }
 
         return $this;
     }
@@ -94,7 +108,17 @@ final class NotifyRulesPlugin implements Plugin
      */
     public function getModels(): array
     {
-        return $this->models;
+        return array_keys($this->models);
+    }
+
+    public function hasModel(string $model): bool
+    {
+        return array_key_exists($model, $this->models);
+    }
+
+    public function getModelLabel(string $model): string
+    {
+        return $this->models[$model] ?? Str::headline(class_basename($model));
     }
 
     public function navigationGroup(?string $group): static

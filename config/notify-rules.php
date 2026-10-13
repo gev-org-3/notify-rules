@@ -43,6 +43,9 @@ return [
     // The model Telegram chats are linked to.
     'user_model' => env('NOTIFY_RULES_USER_MODEL', 'App\\Models\\User'),
 
+    // Column shown and searched when picking users as recipients.
+    'user_title_attribute' => 'name',
+
     // Attributes that are never offered in conditions or templates, in addition to each model's $hidden.
     'excluded_fields' => [
         'password',
